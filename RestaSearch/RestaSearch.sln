@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaSearch", "RestaSearch\RestaSearch.csproj", "{64F4808A-AF1F-4FF3-93A5-76FA42C819A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaSearch.Tests", "RestaSearch.Tests\RestaSearch.Tests.csproj", "{7B8EAA17-78DA-4A25-B958-27C937E25E70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64F4808A-AF1F-4FF3-93A5-76FA42C819A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F4808A-AF1F-4FF3-93A5-76FA42C819A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F4808A-AF1F-4FF3-93A5-76FA42C819A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F4808A-AF1F-4FF3-93A5-76FA42C819A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B8EAA17-78DA-4A25-B958-27C937E25E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8EAA17-78DA-4A25-B958-27C937E25E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8EAA17-78DA-4A25-B958-27C937E25E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8EAA17-78DA-4A25-B958-27C937E25E70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F260017A-03E5-4627-B838-93B478C95CEC}
+	EndGlobalSection
+EndGlobal
