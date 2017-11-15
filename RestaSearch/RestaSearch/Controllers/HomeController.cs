@@ -17,9 +17,7 @@ namespace RestaSearch.Controllers
         // GET: Home
         public ActionResult Index()
         {
-			Kategoria kategoria = new Kategoria { NazwaKategorii = "Pizzeria", OpisKategorii = "pizza pizza" };
-			db.Kategorie.Add(kategoria);
-			db.SaveChanges();
+			var listaKategorii = db.Kategorie.ToList();
 		
             return View();
         }
