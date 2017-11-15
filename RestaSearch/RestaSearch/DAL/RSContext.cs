@@ -8,14 +8,14 @@ using System.Web;
 
 namespace RestaSearch.DAL
 {
-	public class RestaSearchContext : DbContext
+	public class RSContext : DbContext
 	{
-		public RestaSearchContext() : base("RestaSearchContext")
+		public RSContext() : base("RSContext")
 		{
 		}
-		static RestaSearchContext()
+		static RSContext()
 		{
-			Database.SetInitializer<RestaSearchContext>(new RestaSearchInitializer());
+			Database.SetInitializer<RSContext>(new RSInitializer());
 		}
 
 		public virtual DbSet<Lokal> Lokale { get; set; }

@@ -11,7 +11,7 @@ namespace RestaSearch.Controllers
     public class HomeController : Controller
     {
 
-		private RestaSearchContext db = new RestaSearchContext();
+		private RSContext db = new RSContext();
 
 
         // GET: Home

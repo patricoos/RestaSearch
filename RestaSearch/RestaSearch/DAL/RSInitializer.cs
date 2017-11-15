@@ -7,16 +7,16 @@ using RestaSearch.Models;
 
 namespace RestaSearch.DAL
 {
-	public class RestaSearchInitializer : DropCreateDatabaseAlways<RestaSearchContext>
+	public class RSInitializer : DropCreateDatabaseAlways<RSContext>
 	{
 
-		protected override void Seed(RestaSearchContext context)
+		protected override void Seed(RSContext context)
 		{
 			SeedRestaSearchData(context);
 			base.Seed(context);
 		}
 
-		public static void SeedRestaSearchData(RestaSearchContext context)
+		public static void SeedRestaSearchData(RSContext context)
 		{
 			var kategorie = new List<Kategoria>
 			{
