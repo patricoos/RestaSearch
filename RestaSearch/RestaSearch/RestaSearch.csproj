@@ -101,12 +101,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\RestaSearchContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Lokal.cs" />
-    <Compile Include="Models\Lokal_Kategoria.cs" />
+    <Compile Include="Models\LokalKategoria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

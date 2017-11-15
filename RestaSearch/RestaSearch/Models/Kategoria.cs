@@ -7,7 +7,7 @@ namespace RestaSearch.Models
 	{
 		public Kategoria()
 		{
-			this.Lokal_Kategoria = new HashSet<Lokal_Kategoria>();
+			this.LokalKategoria = new HashSet<LokalKategoria>();
 		}
 
 		public int KategoriaId { get; set; }
@@ -19,6 +19,6 @@ namespace RestaSearch.Models
 		public byte Status { get; set; }
 
 
-		public virtual ICollection<Lokal_Kategoria> Lokal_Kategoria { get; private set; }
+		public virtual ICollection<LokalKategoria> LokalKategoria { get; private set; }
 	}
 }

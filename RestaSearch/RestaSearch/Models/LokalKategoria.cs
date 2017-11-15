@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RestaSearch.Models
 {
-	public class Lokal_Kategoria
+	public class LokalKategoria
 	{
 		public int Lokal_KategoriaId { get; set; }
 		public int LokalId { get; set; }
