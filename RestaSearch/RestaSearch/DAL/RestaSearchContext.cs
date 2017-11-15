@@ -10,6 +10,10 @@ namespace RestaSearch.DAL
 {
 	public class RestaSearchContext : DbContext
 	{
+		public RestaSearchContext() : base("RestaSearchContext")
+		{
+		}
+
 		public virtual DbSet<Lokal> Lokale { get; set; }
 		public virtual DbSet<Kategoria> Kategorie { get; set; }
 		public virtual DbSet<LokalKategoria> LokaleKategorie { get; set; }
