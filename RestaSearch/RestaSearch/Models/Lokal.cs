@@ -19,7 +19,6 @@ namespace RestaSearch.Models
 		[StringLength(100)]
 		public string NazwaLokalu { get; set; }
 		[Required(ErrorMessage = "Wprowadz nazwę autora")]
-		[StringLength(100)]
 		public DateTime DataDodania { get; set; }
 		public string Opis { get; set; }
 		public string OpisSkrocony { get; set; }

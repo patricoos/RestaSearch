@@ -7,7 +7,7 @@ namespace RestaSearch.Models
 {
 	public class LokalKategoria
 	{
-		public int Lokal_KategoriaId { get; set; }
+		public int LokalKategoriaId { get; set; }
 		public int LokalId { get; set; }
 		public int KategoriaId { get; set; }
 		public virtual Lokal Lokal { get; set; }
