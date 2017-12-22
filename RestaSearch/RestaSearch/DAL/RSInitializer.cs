@@ -20,7 +20,7 @@ namespace RestaSearch.DAL
 		{
 			var kategorie = new List<Kategoria>
 			{
-				new Kategoria() { KategoriaId=1, NazwaKategorii="Restauracja",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
+				new Kategoria() { KategoriaId=1, NazwaKategorii="Restauracja",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis123" },
 				new Kategoria() { KategoriaId=2, NazwaKategorii="Pizzeria",		NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
 				new Kategoria() { KategoriaId=3, NazwaKategorii="Fast Food",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
 				new Kategoria() { KategoriaId=4, NazwaKategorii="Kebab",		NazwaPlikuIkony="przykladowe.png", OpisKategorii="Fotele Opis" },

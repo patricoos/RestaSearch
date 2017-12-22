@@ -18,8 +18,8 @@ namespace RestaSearch.Controllers
         public ActionResult Index()
         {
 			var listaKategorii = db.Kategorie.ToList();
-		
-            return View();
+
+			return View();
         }
     }
 }

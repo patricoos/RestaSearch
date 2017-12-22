@@ -116,9 +116,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdresLokalu.cs" />
+    <Compile Include="Models\Uzytkownik.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Lokal.cs" />
     <Compile Include="Models\LokalKategoria.cs" />
+    <Compile Include="Models\Miejscowosc.cs" />
+    <Compile Include="Models\Panstwo.cs" />
+    <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
