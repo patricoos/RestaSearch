@@ -28,8 +28,12 @@ namespace RestaSearch.Models
 		[RegularExpression(@"(\+\d{2})*[\d\s-]+", ErrorMessage = "Błędny format numeru telefonu.")]
 		public string TelefonRezerwacja { get; set; }
 		public bool Ukryty { get; set; }
+		public bool Promowany { get; set; }
+		public int Wyswietlenia { get; set; }
 
-		public virtual AdresLokalu AdresLokalu { get; private set; }
+
+		public string AdresLokaluId { get; set; }
+		public virtual AdresLokalu AdresLokalu { get;  set; }
 		
 
 

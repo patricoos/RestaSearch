@@ -28,8 +28,9 @@ namespace RestaSearch.DAL
 				new Kategoria() { KategoriaId=6, NazwaKategorii="Cukiernia",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
 				new Kategoria() { KategoriaId=7, NazwaKategorii="Piekarnia",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
 				new Kategoria() { KategoriaId=8, NazwaKategorii="Food Track",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=9, NazwaKategorii="Lodziarnia",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=10, NazwaKategorii="Pub",			NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" }
+				new Kategoria() { KategoriaId=9, NazwaKategorii="Pub",			NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
+				new Kategoria() { KategoriaId=10, NazwaKategorii="Lodziarnie",	NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" },
+				new Kategoria() { KategoriaId=10, NazwaKategorii="Cukiernie",   NazwaPlikuIkony="przykladowe.png", OpisKategorii="Opis" }
 			};
 
 			kategorie.ForEach(k => context.Kategorie.Add(k));
@@ -37,18 +38,18 @@ namespace RestaSearch.DAL
 
 			var produkty = new List<Lokal>
 			{
-				new Lokal() {LokalId=1, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=2, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=3, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=4, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=5, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=6, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=7, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=8, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=9, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=10, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=11, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false},
-				new Lokal() {LokalId=12, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false,}
+				new Lokal() {LokalId=1, NazwaLokalu="Restauracja PapaJack",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=true , Ukryty=false, Wyswietlenia=1},
+				new Lokal() {LokalId=2, NazwaLokalu="Smarzalnia u Grubego",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=2},
+				new Lokal() {LokalId=3, NazwaLokalu="Restauracja Rucola",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=3},
+				new Lokal() {LokalId=4, NazwaLokalu="Restauracja Marcin",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=4},
+				new Lokal() {LokalId=5, NazwaLokalu="Restauracja PapaJack5",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=5},
+				new Lokal() {LokalId=6, NazwaLokalu="Restauracja PapaJack6",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=6},
+				new Lokal() {LokalId=7, NazwaLokalu="Restauracja PapaJack7",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=true, Ukryty=false, Wyswietlenia=7},
+				new Lokal() {LokalId=8, NazwaLokalu="Restauracja PapaJack8",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=true, Ukryty=false, Wyswietlenia=8},
+				new Lokal() {LokalId=9, NazwaLokalu="Restauracja PapaJack9",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=9},
+				new Lokal() {LokalId=10, NazwaLokalu="Restauracja PapaJack10",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=true, Ukryty=false, Wyswietlenia=10},
+				new Lokal() {LokalId=11, NazwaLokalu="Restauracja PapaJack11",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=11},
+				new Lokal() {LokalId=12, NazwaLokalu="Restauracja PapaJack12",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Promowany=false, Ukryty=false, Wyswietlenia=12}
 
 			};
 			produkty.ForEach(k => context.Lokale.Add(k));

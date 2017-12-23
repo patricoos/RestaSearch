@@ -4,6 +4,10 @@ namespace RestaSearch.Models
 {
 	public class Panstwo
 	{
+		public Panstwo()
+			{
+			this.Region = new HashSet<Region>();
+			}
 		public int PanstwoId { get; set; }
 		public string Nazwa { get; set; }
 

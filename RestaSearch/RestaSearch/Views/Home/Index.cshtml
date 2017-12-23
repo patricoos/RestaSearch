@@ -1,9 +1,197 @@
-﻿
+﻿@model RestaSearch.ViewModels.HomeViewModel
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "RestaSearch - Wyszukiwarka Restauracji";
 }
 
-<h2>Index</h2>
-@Html.CheckBox("isNewlyEnrolled", true)
 
 
+<div class="bg-light ">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card-header bg-primary text-white text-center">Kategorie</div>
+				<div class=" border ">
+
+					@foreach (var kategoria in Model.Kategorie)
+					{
+						<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower() })"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
+					}
+					@*<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Pizzerie</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Fast Food</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Kebab</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Kawiarnie i herbaciarni</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Cukiernie</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Piekarnie</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Food track</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Pub</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Lodziarnie</button>
+						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Cukiernie</button>
+						<a class="btn btn-primary" href="">Button </a>*@
+					<div class=" m-1">
+						<p>
+							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
+						</p>
+						<div class="collapse" id="collapseExample">
+							<div class="card card-body">
+								<h3>Rodzaj kuchni</h3>
+								<p>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Włoska</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Ślaska</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Azjatycka</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Polska</button>
+								</p>
+								<h3>Inne</h3>
+								<p>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Sala Weselna</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Imprezy Firmowe</button>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card-header bg-primary text-white text-center">Miejscowość</div>
+				<div class=" my-0 border">
+					<div class="col">
+						<form class="form-inline  my-1">
+							<input class="form-control mr-sm-0 w-75" type="search" placeholder="Wybierz miejscowość" aria-label="Search">
+							<div class="form-group col-md-0">
+								<select id="inputState" class="form-control">
+									<option selected="">+ 0 km</option>
+									<option>+ 5 km</option>
+									<option>+ 10 km</option>
+									<option>+ 15 km</option>
+									<option>+ 30 km</option>
+									<option>+ 50 km</option>
+									<option>+ 75 km</option>
+								</select>
+							</div>
+						</form>
+						<p>
+							<button class="btn btn-primary  my-1" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Wyznacz na mapie</button>
+						</p>
+						<div class="collapse" id="collapseExample2">
+							<div class="card card-body">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3021436.393077287!2d19.397885402659664!3d51.9814572724019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1509386457892" width="470" height="450" frameborder="0"
+										style="border:0" allowfullscreen=""></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 text-center">
+				<div class="row m-2">
+					<div class="col-md-12 text-center">
+						<a href="#" class="btn w-25 btn-secondary" target="">Szukaj</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="p-1">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="">Promowane&nbsp;Lokale </h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/h.jpg">
+				<p class="blockquote">Restauracja PapaJack</p>
+				<p class="font-weight-light">
+					<b>Opole</b> - plac Wolności 7
+					<br>Dzisiaj otwarte - 11:00–23:00
+				</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/l.jpg">
+				<p class="blockquote">Smazalnia U Grubego </p>
+				<p class="font-weight-light">
+					<b>Turawa</b> - Promenada 19
+					<br>Dzisiaj otwarte - 11:00–22:00
+				</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/o.jpg">
+				<p class="blockquote">Restauracja Rucola</p>
+				<p class="font-weight-light">
+					<b>Zawada</b> - Oleska 45A
+					<br>Dzisiaj otwarte - 13:00–20:00
+				</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/s.jpg">
+				<p class="blockquote">Restauracja "Marcin"</p>
+				<p class="font-weight-light">
+					<b>Zawada</b> - Oleska 43
+					<br>Dzisiaj otwarte - 12:00–22:00
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="p-1 bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="">Polecane dla Ciebie</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/l1.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/l2.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/l3.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="~/Content/Lokale/l4.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="p-1">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="">Nowe Lokale</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+			<div class="col-md-3">
+				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+				<p class="lead">Lead paragraph </p>
+				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</div>
+		</div>
+	</div>
+</div>

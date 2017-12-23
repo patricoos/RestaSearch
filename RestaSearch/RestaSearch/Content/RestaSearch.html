@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="Resta.css" type="text/css"> </head>
+
+<body class="">
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fa d-inline fa-lg fa-cutlery"></i><b>&nbsp;RestaSearch</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
+          </li>
+        </ul>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>
+      </div>
+    </div>
+  </nav>
+  <div class="bg-light p-2">
+    <div class="container">
+      <div class="row m-1 bg-primary">
+        <div class="col-12 col-sm-6 col-md-8 px-3">
+          <form class="form-inline m-2" method="post" action="https://formspree.io/">
+            <input type="text" name="SzukajNazwa" class="form-control w-100" placeholder="Nazwa Lokalu"> </form>
+        </div>
+        <div class="col-6 col-md-4 text-right">
+          <button type="submit" class="btn w-25 btn-secondary  m-2 w-75">Szukaj</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-light ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-header bg-primary text-white text-center">Kategorie</div>
+          <div class=" border ">
+            <a class="btn btn-outline-primary m-1" href=""><i class="fa fa-fw fa-cutlery"></i>Restauracje</a>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Pizzerie</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Fast Food</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Kebab</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Kawiarnie i herbaciarni</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Cukiernie</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Piekarnie</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Food track</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Pub</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Lodziarnie</button>
+            <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Cukiernie</button>
+            <a class="btn btn-primary" href="">Button </a>
+			<div class=" m-1">
+              <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <h3>Rodzaj kuchni</h3>
+                  <p>
+                    <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Włoska</button>
+                    <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Ślaska</button>
+                    <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Azjatycka</button>
+                    <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Polska</button>
+                  </p>
+                  <h3>Inne</h3>
+                  <p>
+                    <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Sala Weselna</button>
+                    <button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Imprezy Firmowe</button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-header bg-primary text-white text-center">Miejscowość</div>
+          <div class=" my-0 border">
+            <div class="col">
+              <form class="form-inline  my-1">
+                <input class="form-control mr-sm-0 w-75" type="search" placeholder="Wybierz miejscowość" aria-label="Search">
+                <div class="form-group col-md-0"> <select id="inputState" class="form-control">
+									<option selected="">+ 0 km</option>
+									<option>+ 5 km</option>
+									<option>+ 10 km</option>
+									<option>+ 15 km</option>
+									<option>+ 30 km</option>
+									<option>+ 50 km</option>
+									<option>+ 75 km</option>
+								</select> </div>
+              </form>
+              <p>
+                <button class="btn btn-primary  my-1" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Wyznacz na mapie</button>
+              </p>
+              <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3021436.393077287!2d19.397885402659664!3d51.9814572724019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1509386457892" width="470" height="450" frameborder="0"
+                    style="border:0" allowfullscreen=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="row m-2">
+            <div class="col-md-12 text-center">
+              <a href="#" class="btn w-25 btn-secondary" target="">Szukaj</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="">Promowane&nbsp;Lokale </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/h.jpg">
+          <p class="blockquote">Restauracja PapaJack</p>
+          <p class="font-weight-light"><b>Opole</b> - plac Wolności 7
+            <br>Dzisiaj otwarte - 11:00–23:00</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/l.jpg">
+          <p class="blockquote">Smazalnia U Grubego </p>
+          <p class="font-weight-light"><b>Turawa</b> - Promenada 19
+            <br>Dzisiaj otwarte - 11:00–22:00</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/o.jpg">
+          <p class="blockquote">Restauracja Rucola</p>
+          <p class="font-weight-light"><b>Zawada</b> - Oleska 45A
+            <br>Dzisiaj otwarte - 13:00–20:00</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/s.jpg">
+          <p class="blockquote">Restauracja "Marcin"</p>
+          <p class="font-weight-light"><b>Zawada</b> - Oleska 43
+            <br>Dzisiaj otwarte - 12:00–22:00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-1 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="">Polecane dla Ciebie</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/l1.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/l2.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/l3.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="Lokale/l4.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="">Nowe Lokale</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="col-md-3">
+          <img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+          <p class="lead">Lead paragraph </p>
+          <p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-white bg-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-light"><i class="fa fa-fw fa-cutlery"></i>RestaSearch</h2>
+          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4">Mapsite</h2>
+          <ul class="list-unstyled">
+            <a href="#" class="text-white">Home</a>
+            <br>
+            <a href="#" class="text-white">About us</a>
+            <br>
+            <a href="#" class="text-white">Our services</a>
+            <br>
+            <a href="#" class="text-white">Stories</a>
+          </ul>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4">Contact</h2>
+          <p>
+            <a href="tel:+246 - 542 550 5462" class="text-white"><i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
+          </p>
+          <p>
+            <a href="mailto:info@pingendo.com" class="text-white"><i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@pingendo.com</a>
+          </p>
+          <p>
+            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank"><i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
+          </p>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4">Social</h2>
+          <div class="align-self-center col-12 col-md-12">
+            <a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook d-inline fa-lg mr-3 text-white"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter d-inline fa-lg text-white mx-2"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram d-inline fa-lg text-white mx-2 p-1"></i></a>
+            <a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus-official d-inline fa-lg text-white mx-3"></i></a>
+            <a href="https://pinterest.com" target="_blank"><i class="fa fa-pinterest-p d-inline fa-lg text-white mx-2"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <p class="text-center text-white">© Copyright 2017 Bujalla Patryk - All rights reserved. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+
+</html>

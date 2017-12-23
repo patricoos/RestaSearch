@@ -4,6 +4,11 @@ namespace RestaSearch.Models
 {
 	public class Miejscowosc
 	{
+		public Miejscowosc()
+		{
+			this.AdresLokalu = new HashSet<AdresLokalu>();
+			this.Uzytkownik = new HashSet<Uzytkownik>();
+		}
 		public int MiejscowoscId { get; set; }
 		public string Nazwa { get; set; }
 
