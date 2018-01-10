@@ -1,4 +1,5 @@
 ﻿@model RestaSearch.ViewModels.HomeViewModel
+@using RestaSearch.Infrastructure
 @{
 	ViewBag.Title = "RestaSearch - Wyszukiwarka Restauracji";
 }
@@ -16,17 +17,7 @@
 					{
 						<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower() })"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
 					}
-					@*<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Pizzerie</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Fast Food</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Kebab</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Kawiarnie i herbaciarni</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Cukiernie</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Piekarnie</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Food track</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Pub</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Lodziarnie</button>
-						<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off"><i class="fa fa-fw fa-cutlery"></i>Cukiernie</button>
-						<a class="btn btn-primary" href="">Button </a>*@
+
 					<div class=" m-1">
 						<p>
 							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
@@ -53,32 +44,51 @@
 			<div class="col-md-6">
 				<div class="card-header bg-primary text-white text-center">Miejscowość</div>
 				<div class=" my-0 border">
-					<div class="col">
-						<form class="form-inline  my-1">
-							<input class="form-control mr-sm-0 w-75" type="search" placeholder="Wybierz miejscowość" aria-label="Search">
-							<div class="form-group col-md-0">
-								<select id="inputState" class="form-control">
-									<option selected="">+ 0 km</option>
-									<option>+ 5 km</option>
-									<option>+ 10 km</option>
-									<option>+ 15 km</option>
-									<option>+ 30 km</option>
-									<option>+ 50 km</option>
-									<option>+ 75 km</option>
-								</select>
-							</div>
-						</form>
-						<p>
-							<button class="btn btn-primary  my-1" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Wyznacz na mapie</button>
-						</p>
-						<div class="collapse" id="collapseExample2">
-							<div class="card card-body">
-								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3021436.393077287!2d19.397885402659664!3d51.9814572724019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1509386457892" width="470" height="450" frameborder="0"
-										style="border:0" allowfullscreen=""></iframe>
-							</div>
+
+					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Wyzacz na mapie</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Pobierz lokalizacje</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Wybierz miejscowość</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+							<div id="map"></div>
+							<button onclick="getLocation()">Pobierz swoją lokalizacje</button>
+
+						</div>
+						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+							<form class="form-inline  my-1">
+								<input class="form-control mr-sm-0 w-75" type="search" placeholder="Wybierz miejscowość" aria-label="Search">
+								<div class="form-group col-md-0">
+									<select id="inputState" class="form-control">
+										<option selected="">+ 0 km</option>
+										<option>+ 5 km</option>
+										<option>+ 10 km</option>
+										<option>+ 15 km</option>
+										<option>+ 30 km</option>
+										<option>+ 50 km</option>
+										<option>+ 75 km</option>
+									</select>
+								</div>
+								@Html.DropDownListFor(m => m.Miejscowosci, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa"))
+							</form>
+						</div>
+						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+							<p>Pobierz swoją lokalizacje</p>
+							<p id="demo"></p>
+							<button onclick="getLocation()">Pobierz</button>
+
 						</div>
 					</div>
-				</div>
+					</div>
+
 			</div>
 			<div class="col-md-12 text-center">
 				<div class="row m-2">
@@ -90,6 +100,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="p-1">
 	<div class="container">
 		<div class="row">
@@ -98,72 +109,50 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/h.jpg">
-				<p class="blockquote">Restauracja PapaJack</p>
-				<p class="font-weight-light">
-					<b>Opole</b> - plac Wolności 7
-					<br>Dzisiaj otwarte - 11:00–23:00
-				</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/l.jpg">
-				<p class="blockquote">Smazalnia U Grubego </p>
-				<p class="font-weight-light">
-					<b>Turawa</b> - Promenada 19
-					<br>Dzisiaj otwarte - 11:00–22:00
-				</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/o.jpg">
-				<p class="blockquote">Restauracja Rucola</p>
-				<p class="font-weight-light">
-					<b>Zawada</b> - Oleska 45A
-					<br>Dzisiaj otwarte - 13:00–20:00
-				</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/s.jpg">
-				<p class="blockquote">Restauracja "Marcin"</p>
-				<p class="font-weight-light">
-					<b>Zawada</b> - Oleska 43
-					<br>Dzisiaj otwarte - 12:00–22:00
-				</p>
-			</div>
+			@foreach (var promowane in Model.Promowane)
+			{
+				<div class="col-md-3">
+					<a href="@Url.Action("Szczegoly", "Lokale", new {id= promowane.LokalId })">
+						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(promowane.NazwaPlikuObrazka)">
+					</a>
+					<p class="blockquote">@promowane.NazwaLokalu</p>
+					<p class="font-weight-light">
+						<b>@promowane.Miejscowosc.Nazwa</b> - @promowane.Ulica @promowane.NumerBudynku
+
+						<br>Dzisiaj otwarte - 11:00–23:00
+					</p>
+
+				</div>
+			}
 		</div>
 	</div>
 </div>
+
 <div class="p-1 bg-light">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="">Polecane dla Ciebie</h1>
+				<h1 class="">Najczesciej odwiedzane</h1>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/l1.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/l2.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/l3.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="~/Content/Lokale/l4.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
+			@foreach (var najwys in Model.NajWyswietlen)
+			{
+				<div class="col-md-3">
+					<a href="@Url.Action("Szczegoly", "Lokale", new { id= najwys.LokalId })">
+						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(najwys.NazwaPlikuObrazka)">
+					</a>
+					<p class="blockquote">@najwys.NazwaLokalu</p>
+					<p class="font-weight-light">
+						<b>@najwys.Miejscowosc.Nazwa</b> - @najwys.Ulica @najwys.NumerBudynku
+						<br>Dzisiaj otwarte - 11:00–23:00
+					</p>
+				</div>
+			}
 		</div>
 	</div>
 </div>
+
 <div class="p-1">
 	<div class="container">
 		<div class="row">
@@ -172,26 +161,125 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
-			<div class="col-md-3">
-				<img class="img-fluid d-block" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
-				<p class="lead">Lead paragraph </p>
-				<p class="">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-			</div>
+			@foreach (var nowosci in Model.Nowosci)
+			{
+				<div class="col-md-3">
+					<a href="@Url.Action("Szczegoly", "Lokale", new {id= nowosci.LokalId })">
+						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(nowosci.NazwaPlikuObrazka)">
+					</a>
+					<p class="blockquote">@nowosci.NazwaLokalu</p>
+					<p class="font-weight-light">
+						<b>@nowosci.Miejscowosc.Nazwa</b>  - @nowosci.Ulica @nowosci.NumerBudynku
+						<br>Dzisiaj otwarte - 11:00–23:00
+					</p>
+				</div>
+			}
 		</div>
 	</div>
 </div>
+
+
+
+
+
+<script>
+
+	// In the following example, markers appear when the user clicks on the map.
+	// The markers are stored in an array.
+	// The user can then click an option to hide, show or delete the markers.
+	var map;
+	var markers = [];
+	var punkt;
+
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: { lat: 52.157758, lng: 19.1271972 },
+			zoom: 6,
+			gestureHandling: 'greedy'
+		});
+
+		// This event listener will call addMarker() when the map is clicked.
+		map.addListener('click', function (event) {
+			addMarker(event.latLng);
+		});
+
+		// Adds a marker at the center of the map.
+	}
+
+	// Adds a marker to the map and push to the array.
+	function addMarker(location) {
+		deleteMarkers();
+		var marker = new google.maps.Marker({
+			position: location,
+			map: map
+		});
+		markers.push(marker);
+	}
+
+	// Sets the map on all markers in the array.
+	function setMapOnAll(map) {
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
+	}
+
+	// Removes the markers from the map, but keeps them in the array.
+	function clearMarkers() {
+		setMapOnAll(null);
+	}
+
+	// Shows any markers currently in the array.
+	function showMarkers() {
+		setMapOnAll(map);
+	}
+
+	// Deletes all markers in the array by removing references to them.
+	function deleteMarkers() {
+		clearMarkers();
+		markers = [];
+	}
+
+	// Pobieranie i Wyświetlanie danych gps
+	var x = document.getElementById("demo");
+
+	function getLocation() {
+		if (navigator.geolocation) {
+
+			navigator.geolocation.getCurrentPosition(function (position) {
+				myLatLng = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
+				addMarker(myLatLng);
+			});
+		} else {
+			x.innerHTML = "Geolokacja nie jest obsługiwana przez Twoją wyszukiwarkę.";
+		}
+	}
+
+	function showPosition(position) {
+		x.innerHTML = "Latitude: " + position.coords.latitude +
+			"<br>Longitude: " + position.coords.longitude;
+	}
+</script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&callback=initMap">
+</script>
+
+<style>
+	#map {
+		height: 400px;
+		width: 100%;
+	}
+
+	#floating-panel {
+		position: absolute;
+		top: 60px;
+		left: 30%;
+		z-index: 5;
+		background-color: #fff;
+		padding: 5px;
+		border: 1px solid #999;
+		text-align: center;
+		font-family: 'Roboto','sans-serif';
+		line-height: 30px;
+		padding-left: 10px;
+	}
+</style>

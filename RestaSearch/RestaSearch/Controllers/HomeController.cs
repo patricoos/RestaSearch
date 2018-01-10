@@ -19,6 +19,7 @@ namespace RestaSearch.Controllers
         public ActionResult Index()
         {
 			var kategorie = db.Kategorie.ToList();
+			var miejscowosci = db.Miejscowosci.ToList();
 			var nowosci = db.Lokale.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(4).ToList();
 			var promowane = db.Lokale.Where(a => !a.Ukryty && a.Promowany).OrderBy(a => Guid.NewGuid()).Take(4).ToList();
 			var najwyswietlen = db.Lokale.Where(a => !a.Ukryty).OrderByDescending(a => a.Wyswietlenia).Take(4).ToList();
@@ -26,6 +27,7 @@ namespace RestaSearch.Controllers
 			var vm = new HomeViewModel()
 			{
 				Kategorie = kategorie,
+				Miejscowosci=miejscowosci,
 				Nowosci = nowosci,
 				Promowane = promowane,
 				NajWyswietlen = najwyswietlen
@@ -33,5 +35,5 @@ namespace RestaSearch.Controllers
 
 			return View(vm);
         }
-    }
+	}
 }

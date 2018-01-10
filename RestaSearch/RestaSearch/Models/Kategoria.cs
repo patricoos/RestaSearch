@@ -5,10 +5,10 @@ namespace RestaSearch.Models
 {
 	public class Kategoria
 	{
-		public Kategoria()
-		{
-			this.LokalKategoria = new HashSet<LokalKategoria>();
-		}
+		//public Kategoria()
+		//{
+		//	this.LokalKategoria = new HashSet<LokalKategoria>();
+		//}
 
 		public int KategoriaId { get; set; }
 		[StringLength(100)]
@@ -19,6 +19,10 @@ namespace RestaSearch.Models
 		public byte Status { get; set; }
 
 
-		public virtual ICollection<LokalKategoria> LokalKategoria { get; private set; }
+
+		public virtual ICollection<Lokal> Lokale { get; set; }
+
+
+		//public virtual ICollection<LokalKategoria> LokalKategoria { get; private set; }
 	}
 }

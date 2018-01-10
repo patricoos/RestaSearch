@@ -1,4 +1,5 @@
-﻿using RestaSearch.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using RestaSearch.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Web;
 
 namespace RestaSearch.DAL
 {
-	public class RSContext : DbContext
+	public class RSContext : IdentityDbContext<ApplicationUser>
 	{
 		public RSContext() : base("RSContext")
 		{
@@ -17,11 +18,15 @@ namespace RestaSearch.DAL
 		{
 			Database.SetInitializer<RSContext>(new RSInitializer());
 		}
+		public static RSContext Create()
+		{
+			return new RSContext();
+		}
+
 
 		public virtual DbSet<Lokal> Lokale { get; set; }
 		public virtual DbSet<Kategoria> Kategorie { get; set; }
-		public virtual DbSet<LokalKategoria> LokaleKategorie { get; set; }
-		public virtual DbSet<AdresLokalu> AdresyLokali { get; set; }
+		//public virtual DbSet<LokalKategoria> LokaleKategorie { get; set; }
 		public virtual DbSet<Miejscowosc> Miejscowosci { get; set; }
 		public virtual DbSet<Region> Regiony { get; set; }
 		public virtual DbSet<Panstwo> Panstwa { get; set; }

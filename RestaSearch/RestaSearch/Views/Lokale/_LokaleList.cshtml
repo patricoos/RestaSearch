@@ -1,0 +1,65 @@
+﻿@model IEnumerable<RestaSearch.Models.Lokal>
+@using RestaSearch.Infrastructure
+
+@foreach (var lokal in Model)
+{
+	<div class="card">
+		<div class="card-header">
+			<h4>@lokal.NazwaLokalu<font color="gray"> - @lokal.Miejscowosc.Nazwa</font> </h4> 
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-4">
+					<a href="@Url.Action("Szczegoly", "Lokale", new { id = lokal.LokalId })">
+						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(lokal.NazwaPlikuObrazka)">
+					</a>
+				</div>
+				<div class="col-md-8">
+					<h6 class="text-muted">@lokal.OpisSkrocony </h6>
+					<p class=" p-y-1">Godziny otwarcia</p>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+<div class="py-5">
+	<div class="container">
+		<div class="row">
+
+			<div id="map"></div>
+			<script>
+				function initMap() {
+					var map = new google.maps.Map(document.getElementById('map'), {
+						center: { lat: 52.157758, lng: 19.1271972 },
+						zoom: 6,
+						gestureHandling: 'greedy'
+					});
+					@foreach (var lokal in Model)
+							{
+							<text>
+								var marker = new google.maps.Marker({
+									position: { lat: @lokal.Lat, lng: @lokal.Long },
+						map: map
+					});
+					</text>
+						}
+
+					}
+			</script>
+
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&callback=initMap"
+					async defer></script>
+
+
+		</div>
+	</div>
+</div>
+
+<style>
+	/* Always set the map height explicitly to define the size of the div
+	  * element that contains the map. */
+	#map {
+		height: 400px;
+		width: 700px;
+	}
+</style>

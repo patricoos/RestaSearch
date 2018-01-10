@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>@ViewBag.Title</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="~/Content/Resta.css" type="text/css">
+</head>
+<body class="">
+	<nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+		<div class="container">
+			<a class="navbar-brand" href="@Url.Action("Index", "Home")"><i class="fa d-inline fa-lg fa-cutlery"></i><b>&nbsp;RestaSearch</b></a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+				<ul class="navbar-nav">
+
+					@Html.Partial("_LoginPartial")
+
+					@*<li class="nav-item">
+								<a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
+							</li>
+						</ul>
+						<a class="btn navbar-btn ml-2 text-white btn-secondary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>*@
+			</div>
+		</div>
+	</nav>
+
+	<div class="bg-light p-2">
+		<div class="container">
+			<div class="row m-1 bg-primary">
+				<div style="overflow: hidden; margin-bottom: 30px;">
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("Index", "Home")">
+						Start
+					</a>
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("Index", "Manage")">
+						Twoje dane
+					</a>
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("ListaZamowien", "Manage")" style="width: 100px">
+						Komentarze
+					</a>
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage")" style="width: 100px">
+						Dodaj Restauracje
+					</a>
+
+
+				</div>
+				<div style="overflow: hidden; margin-bottom: 30px;">
+					@if (@User.IsInRole("Admin"))
+					{
+						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajProdukt", "Manage")">
+							Dodaj Produkt
+						</a>
+						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajProdukt", "Manage")">
+							Dodaj Kategorie
+						</a>
+						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajProdukt", "Manage")">
+							Lista Użytkowników
+						</a>
+						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Content("~/elmah")">
+							Logi
+						</a>
+						@*<a class="manageLink" href="@Url.Content("~/hangfire")">
+					Jobs
+				</a>*@
+
+					}
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="p-1 bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div>
+						@RenderBody()
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="text-white bg-secondary">
+		<div class="container">
+			<div class="row">
+				<div class="p-4 col-md-3">
+					<h2 class="mb-4 text-light"><i class="fa fa-fw fa-cutlery"></i>RestaSearch</h2>
+					<p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
+				</div>
+				<div class="p-4 col-md-3">
+					<h2 class="mb-4">Mapsite</h2>
+					<ul class="list-unstyled">
+						<a href="#" class="text-white">Home</a>
+						<br />
+						<a href="#" class="text-white">About us</a>
+						<br />
+						<a href="#" class="text-white">Our services</a>
+						<br />
+						<a href="#" class="text-white">Stories</a>
+					</ul>
+				</div>
+				<div class="p-4 col-md-3">
+					<h2 class="mb-4">Contact</h2>
+					<p>
+						<a href="tel:+246 - 542 550 5462" class="text-white"><i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
+					</p>
+					<p>
+						<a href="mailto:info@pingendo.com" class="text-white"><i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@pingendo.com</a>
+					</p>
+					<p>
+						<a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank"><i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
+					</p>
+				</div>
+				<div class="p-4 col-md-3">
+					<h2 class="mb-4">Social</h2>
+					<div class="align-self-center col-12 col-md-12">
+						<a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook d-inline fa-lg mr-3 text-white"></i></a>
+						<a href="https://twitter.com" target="_blank"><i class="fa fa-twitter d-inline fa-lg text-white mx-2"></i></a>
+						<a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram d-inline fa-lg text-white mx-2 p-1"></i></a>
+						<a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus-official d-inline fa-lg text-white mx-3"></i></a>
+						<a href="https://pinterest.com" target="_blank"><i class="fa fa-pinterest-p d-inline fa-lg text-white mx-2"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 mt-3">
+					<p class="text-center text-white">© Copyright 2017 Bujalla Patryk - All rights reserved. </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

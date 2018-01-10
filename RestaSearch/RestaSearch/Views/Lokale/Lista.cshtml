@@ -1,8 +1,18 @@
-﻿
-@{
-    ViewBag.Title = "Lista";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+	ViewBag.Title = "Lista";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lista</h2>
+<div class="container">
+	<div class="py-4">
+		<div class="row">
+			<div class="col-md-3">
+				@Html.Action("KategorieMenu")
+			</div>
+			<div class="col-md-9">
+				@Html.Partial("_LokaleList")
+			</div>
 
+		</div>
+	</div>
+</div>

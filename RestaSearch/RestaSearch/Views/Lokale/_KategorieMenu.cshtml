@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RestaSearch.Models.Kategoria>
+@using RestaSearch.Infrastructure
+
+			
+				<div class="card-header bg-primary text-white text-center">Kategorie</div>
+				<div class=" border ">
+					@foreach (var kategoria in Model)
+					{
+						<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower()})"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
+					}
+					<div class=" m-1">
+						<p>
+							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
+						</p>
+						<div class="collapse" id="collapseExample">
+							<div class="card card-body">
+								<h3>Rodzaj kuchni</h3>
+								<p>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Włoska</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Ślaska</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Azjatycka</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Polska</button>
+								</p>
+								<h3>Inne</h3>
+								<p>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Sala Weselna</button>
+									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Imprezy Firmowe</button>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-header bg-primary text-white text-center">Miejscowość</div>
+				<div class=" my-0 border">
+					<div class="col">
+						<form class="form-inline  my-1">
+							<input class="form-control mr-sm-0 w-100" type="search" placeholder="Wybierz miejscowość" aria-label="Search">
+							<div class="form-group col-md-0">
+								<select id="inputState" class="form-control">
+									<option selected="">+ 0 km</option>
+									<option>+ 5 km</option>
+									<option>+ 10 km</option>
+									<option>+ 15 km</option>
+									<option>+ 30 km</option>
+									<option>+ 50 km</option>
+									<option>+ 75 km</option>
+								</select>
+							</div>
+						</form>
+						<p>
+							<button class="btn btn-primary  my-1" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Wyznacz na mapie</button>
+						</p>
+						<div class="collapse" id="collapseExample2">
+							<div class="card card-body">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3021436.393077287!2d19.397885402659664!3d51.9814572724019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1509386457892" width="470" height="450" frameborder="0"
+										style="border:0" allowfullscreen=""></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a href="#" class="btn w-100 btn-secondary" target="">Zmień</a>
+			
+			

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<RestaSearch.Models.Lokal>
+@using RestaSearch.Infrastructure
+
+@{
+	ViewBag.Title = "LokaleSzukaj";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="py-4">
+		<div class="row">
+			<div class="col-md-12">
+				@foreach (var lokal in Model)
+			{
+					<div class="card">
+						<div class="card-header">
+							<h4>@lokal.NazwaLokalu<font color="gray"> - @lokal.Miejscowosc.Nazwa</font> </h4>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-4">
+									<a href="@Url.Action("Szczegoly", "Lokale", new {id= lokal.LokalId })">
+										<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(lokal.NazwaPlikuObrazka)">
+									</a>
+								</div>
+								<div class="col-md-8">
+									<h6 class="text-muted">@lokal.OpisSkrocony </h6>
+									<p class=" p-y-1">Godziny otwarcia</p>
+								</div>
+							</div>
+						</div>
+					</div>
+			}
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model RestaSearch.Models.Lokal
+@using RestaSearch.Infrastructure
+
+
+
+@{
+	ViewBag.Title = "Szczegoly";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="py-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb" style="margin-bottom:0px;margin-top:0px">
+					<li class="breadcrumb-item">
+						<a href="#">Home</a>
+					</li>
+					<li class="breadcrumb-item active">Link</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="py-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h1 class="">@Model.NazwaLokalu</h1>
+				<p class=""> @Model.Miejscowosc.Nazwa - @Model.Ulica @Model.NumerBudynku</p>
+				<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(Model.NazwaPlikuObrazka)">
+				<p class="">@Model.OpisSkrocony</p>
+				<ul class="">
+					<li>One</li>
+					<li>Two</li>
+					<li>Three</li>
+				</ul>
+			</div>
+			<div class="col-md-8">
+				<p class=""> @Model.Opis</p>
+				@*<img class="d-block img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyDW8nO9JhT_pEjebobq9pgUF2cEp0EUb1I&amp;markers=New+York+City&amp;center=New+York+City&amp;zoom=12&amp;size=400x400&amp;sensor=false">*@
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="py-5">
+	<div class="container">
+		<div class="row">
+			<div id="map"></div>
+			<script>
+				function initMap() {
+					var punkt = { lat: @Model.Lat, lng: @Model.Long };
+					var map = new google.maps.Map(document.getElementById('map'), {
+						center: punkt,
+						zoom: 16
+					});
+					var marker = new google.maps.Marker({
+						position: punkt,
+						map: map
+					});
+
+				}
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&callback=initMap"
+					async defer></script>
+
+
+		</div>
+	</div>
+</div>
+
+<style>
+	/* Always set the map height explicitly to define the size of the div
+	  * element that contains the map. */
+	#map {
+		height: 400px;
+		width: 700px;
+	}
+</style>
+

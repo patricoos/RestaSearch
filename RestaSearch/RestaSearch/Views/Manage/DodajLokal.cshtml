@@ -1,0 +1,277 @@
+﻿@model RestaSearch.ViewModels.EditLokalViewModel
+@{
+	ViewBag.Title = "DodajLokal";
+	Layout = "~/Views/Shared/_ManageLayout.cshtml";
+}
+
+<h2>Edycja lokalu</h2>
+<div>
+	@if (Model.Potwierdzenie.HasValue && Model.Potwierdzenie.Value)
+	{
+		<div style="text-align: center; margin: 50px;">
+			Pomyślnie wprowadzono zmiany!
+		</div>
+	}
+
+	@using (@Html.BeginForm("DodajLokal", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="error-summary-centered">
+			@Html.ValidationSummary()
+		</div>
+		@Html.HiddenFor(o => o.Lokal.LokalId)
+		@Html.HiddenFor(o => o.Lokal.DataDodania)
+		@Html.HiddenFor(o => o.Lokal.NazwaPlikuObrazka)
+
+		<div>
+			<table style="margin-left: auto; margin-right: auto;">
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.NazwaLokalu, "NazwaLokalu:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.NazwaLokalu)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.NazwaLokalu)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.NazwMiejscowosc, "Miejscowosc:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.NazwMiejscowosc)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.NazwMiejscowosc)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.KodPocztowy, "KodPocztowy:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.KodPocztowy)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.KodPocztowy)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.Ulica, "Ulica:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.Ulica)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.Ulica)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.NumerBudynku, "NumerBudynku:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.NumerBudynku)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.NumerBudynku)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.OpisSkrocony, "Opis skrócony:")</td>
+					<td>@Html.TextAreaFor(o => o.Lokal.OpisSkrocony, new { rows = "3"})</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.OpisSkrocony)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.Opis, "Pełen Opis:")</td>
+					<td>@Html.TextAreaFor(o => o.Lokal.Opis, new { rows = "5"})</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.Opis)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Kategorie, "Kategoria:")</td>
+					<td>@Html.DropDownListFor(m => m.Lokal.KategoriaId, new SelectList(Model.Kategorie, "KategoriaId", "NazwaKategorii", Model.Kategorie.First().KategoriaId))</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.Telefon, "Telefon:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.Telefon)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.Telefon)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.TelefonRezerwacja, "Telefon Rezerwacja:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.TelefonRezerwacja)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.TelefonRezerwacja)</td>
+				</tr>
+
+
+				@if (ViewBag.EditMode == null || !ViewBag.EditMode)
+				{
+					<tr>
+						<td>Dodaj Zdjecie:</td>
+						<td colspan="3">
+							<div class="upload">
+								<input type="file" name="file" />
+							</div>
+						</td>
+					</tr>
+				}
+
+				<tr>
+					<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
+					<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
+					<td></td>
+				</tr>
+
+
+				@if (@User.IsInRole("Admin"))
+				{
+					@*<tr>
+						<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
+						<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
+						<td></td>
+					</tr>*@
+					<tr>
+						<td style="text-align: left">
+							@if (ViewBag.EditMode)
+							{
+								if (Model.Lokal.Ukryty)
+								{
+									<a href="@Url.Action("PokazLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
+										Przywróć
+									</a>
+								}
+								else
+								{
+									<a href="@Url.Action("UkryjLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
+										Usuń
+									</a>
+								}
+							}
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">
+							@if (ViewBag.EditMode)
+							{
+								if (Model.Lokal.Promowany)
+								{
+									<a href="@Url.Action("PromoLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
+										Promowany
+									</a>
+								}
+								else
+								{
+									<a href="@Url.Action("NiePromoLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
+										Nie Promowany
+									</a>
+								}
+							}
+						</td>
+					</tr>
+				}
+				
+			</table>
+			<br/>
+			<div  align="center">
+				<p> Zaznacz lokalizacje lokalu na mapie:</p>
+				<div id="map"></div>
+				<button type="button" onclick="getLocation()">Pobierz swoją lokalizacje</button>
+			</div>
+			<br />
+			<table  style="margin-left: auto; margin-right: auto;">
+				<tr>
+					<td><label for="Lokal_Ulica">Lokalizacja:</label></td>
+					<td><input id="LatLng" type="text" size="35" value="Klikniej na mape aby wybrać lokalizacje"  /></td>
+				</tr>
+				<tr class="ukryty">
+					<td><input id="Lat" name="Lokal.Lat" type="text" value="" /></td>
+					<td><input id="Long" name="Lokal.Long" type="text" value=""/></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">
+						<input type="submit" value="Zapisz" class="submitLink" style="height: 40px; margin-right: 0px; margin-top: 30px; font-weight: bold;" />
+					</td>
+				</tr>
+			</table>
+			<br />
+		</div>
+	}
+</div>
+
+
+
+
+<script>
+
+	var map;
+	var markers = [];
+	var punkt;
+
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: { lat: 52.157758, lng: 19.1271972 },
+			zoom: 6,
+			gestureHandling: 'greedy'
+		});
+
+		// This event listener will call addMarker() when the map is clicked.
+		map.addListener('click', function (event) {
+			addMarker(event.latLng);
+			konwert(event.latLng);
+		});
+
+		// Adds a marker at the center of the map.
+	}
+
+	function konwert(lok) {
+		var res = lok.toString();
+		var re = res.slice(1, res.length - 1);
+		var reb = re.slice(0, re.indexOf(","));
+		var rep = re.slice(re.indexOf(",") + 2, re.length)
+		wpiszLat(reb);
+		wpiszLong(rep);
+		wpiszLatLng(res);
+	}
+
+	// Adds a marker to the map and push to the array.
+	function addMarker(location) {
+		setMapOnAll(null);
+		markers = [];
+		punkt = new google.maps.Marker({
+			position: location,
+			map: map
+		});
+		markers.push(punkt);
+	}
+
+
+	// Sets the map on all markers in the array.
+	function setMapOnAll(j) {
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(j);
+		}
+	}
+
+	// Pobieranie i Wyświetlanie danych gps
+	var x = document.getElementById("demo");
+
+	function getLocation() {
+		if (navigator.geolocation) {
+
+			navigator.geolocation.getCurrentPosition(function (position) {
+				myLatLng = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
+				addMarker(myLatLng);
+				konwert(myLatLng);
+			});
+		} else {
+			alert('twoja przeglądarka nie wspiera geolokacji...');
+			x.innerHTML = "Geolokacja nie jest obsługiwana przez Twoją wyszukiwarkę.";
+		}
+	}
+
+	function wpiszLatLng(znak) { document.getElementById("LatLng").value = znak; }
+	function wpiszLat(znak) { document.getElementById("Lat").value = znak; }
+	function wpiszLong(znak) { document.getElementById("Long").value = znak; }
+
+
+</script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&callback=initMap">
+</script>
+
+<style>
+	.ukryty { visibility: hidden;}
+
+	#map {
+		height: 450px;
+		width: 500px;
+	}
+
+	#floating-panel {
+		position: absolute;
+		top: 60px;
+		left: 30%;
+		z-index: 5;
+		background-color: #fff;
+		padding: 5px;
+		border: 1px solid #999;
+		text-align: center;
+		font-family: 'Roboto','sans-serif';
+		line-height: 30px;
+		padding-left: 10px;
+	}
+</style>

@@ -1,0 +1,26 @@
+﻿
+@{
+	ViewBag.Title = "_RightSectionLayout";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="py-4">
+		<div class="row">
+			<div class="col-md-3">
+				@Html.Action("KategorieMenu", "Lokale")
+			</div>
+			<div class="col-md-9">
+				<h1>
+					@RenderSection("SectionTitle", required: false)
+				</h1>
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+</div>
+
+@*@section Scripts
+{
+	@RenderSection("Scripts", required: false)
+}*@
