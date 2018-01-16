@@ -53,19 +53,35 @@
 				</tr>
 				<tr>
 					<td>@Html.LabelFor(o => o.Lokal.OpisSkrocony, "Opis skrócony:")</td>
-					<td>@Html.TextAreaFor(o => o.Lokal.OpisSkrocony, new { rows = "3"})</td>
+					<td>@Html.TextAreaFor(o => o.Lokal.OpisSkrocony, new { rows = "3" })</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.OpisSkrocony)</td>
 				</tr>
 				<tr>
 					<td>@Html.LabelFor(o => o.Lokal.Opis, "Pełen Opis:")</td>
-					<td>@Html.TextAreaFor(o => o.Lokal.Opis, new { rows = "5"})</td>
+					<td>@Html.TextAreaFor(o => o.Lokal.Opis, new { rows = "5" })</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.Opis)</td>
 				</tr>
+				@*<tr>
+						<td>@Html.LabelFor(o => o.Kategorie, "Kategoria:")</td>
+						<td>@Html.DropDownListFor(m => m.Lokal.KategoriaId, new SelectList(Model.Kategorie, "KategoriaId", "NazwaKategorii", Model.Kategorie.First().KategoriaId))</td>
+						<td></td>
+					</tr>*@
+
 				<tr>
-					<td>@Html.LabelFor(o => o.Kategorie, "Kategoria:")</td>
-					<td>@Html.DropDownListFor(m => m.Lokal.KategoriaId, new SelectList(Model.Kategorie, "KategoriaId", "NazwaKategorii", Model.Kategorie.First().KategoriaId))</td>
+					<td>@Html.LabelFor(model => model.Kategorie, "Kategoria:")</td>
+				</tr>
+				<tr>
+					<td>
+						@for (var i = 0; i < Model.Kategorie.Count(); i++)
+						{
+							@Html.EditorFor(m => Model.Kategorie[i].Checked)
+							@Html.DisplayFor(m => Model.Kategorie[i].Nazwa)
+							@Html.HiddenFor(m => Model.Kategorie[i].Id)
+						}
+					</td>
 					<td></td>
 				</tr>
+
 				<tr>
 					<td>@Html.LabelFor(o => o.Lokal.Telefon, "Telefon:")</td>
 					<td>@Html.TextBoxFor(o => o.Lokal.Telefon)</td>
@@ -100,10 +116,10 @@
 				@if (@User.IsInRole("Admin"))
 				{
 					@*<tr>
-						<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
-						<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
-						<td></td>
-					</tr>*@
+							<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
+							<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
+							<td></td>
+						</tr>*@
 					<tr>
 						<td style="text-align: left">
 							@if (ViewBag.EditMode)
@@ -143,23 +159,23 @@
 						</td>
 					</tr>
 				}
-				
+
 			</table>
-			<br/>
-			<div  align="center">
+			<br />
+			<div align="center">
 				<p> Zaznacz lokalizacje lokalu na mapie:</p>
 				<div id="map"></div>
 				<button type="button" onclick="getLocation()">Pobierz swoją lokalizacje</button>
 			</div>
 			<br />
-			<table  style="margin-left: auto; margin-right: auto;">
+			<table style="margin-left: auto; margin-right: auto;">
 				<tr>
 					<td><label for="Lokal_Ulica">Lokalizacja:</label></td>
-					<td><input id="LatLng" type="text" size="35" value="Klikniej na mape aby wybrać lokalizacje"  /></td>
+					<td><input id="LatLng" type="text" size="35" value="Klikniej na mape aby wybrać lokalizacje" /></td>
 				</tr>
 				<tr class="ukryty">
 					<td><input id="Lat" name="Lokal.Lat" type="text" value="" /></td>
-					<td><input id="Long" name="Lokal.Long" type="text" value=""/></td>
+					<td><input id="Long" name="Lokal.Long" type="text" value="" /></td>
 				</tr>
 				<tr>
 					<td style="text-align: right;">
@@ -250,7 +266,9 @@
 </script>
 
 <style>
-	.ukryty { visibility: hidden;}
+	.ukryty {
+		visibility: hidden;
+	}
 
 	#map {
 		height: 450px;

@@ -160,12 +160,13 @@ namespace RestaSearch.Controllers
 			}
 
 			var result = new EditLokalViewModel();
-			result.Kategorie = db.Kategorie.ToList();
+			result.Kategorie = db.Kategorie.ToList().Select(x => new KategoriaViewModel(x)).ToList();
 			result.Miejscowosci = db.Miejscowosci.ToList();
 			result.Lokal = lokal;
 			result.Potwierdzenie = potwierdzenie;
 
 			return View(result);
+
 		}
 
 		[HttpPost]
@@ -202,15 +203,27 @@ namespace RestaSearch.Controllers
 						model.Lokal.Promowany = false;
 						model.Lokal.Wyswietlenia = 0;
 
-						db.Entry(model.Lokal).State = EntityState.Added;
+						db.Lokale.Add(model.Lokal);
+
+
+						foreach (var item in model.Kategorie.Where(x => x.Checked))
+						{
+							var lokalKategoria = new LokalKategoria();
+							lokalKategoria.KategoriaId = item.Id;
+							lokalKategoria.LokalId = model.Lokal.LokalId;
+							db.LokaleKategorie.Add(lokalKategoria);
+						}
+
+
 						db.SaveChanges();
 
 						return RedirectToAction("DodajLokal", new { potwierdzenie = true });
 					}
 					else
 					{
+
 						var kategorie = db.Kategorie.ToList();
-						model.Kategorie = kategorie;
+						model.Kategorie = db.Kategorie.ToList().Select(x => new KategoriaViewModel(x)).ToList();
 						var miejscowosci = db.Miejscowosci.ToList();
 						model.Miejscowosci = miejscowosci;
 
@@ -220,8 +233,9 @@ namespace RestaSearch.Controllers
 				else
 				{
 					ModelState.AddModelError("", "Nie wskazano pliku");
+
 					var kategorie = db.Kategorie.ToList();
-					model.Kategorie = kategorie;
+					model.Kategorie = db.Kategorie.ToList().Select(x => new KategoriaViewModel(x)).ToList();
 					var miejscowosci = db.Miejscowosci.ToList();
 					model.Miejscowosci = miejscowosci;
 					return View(model);

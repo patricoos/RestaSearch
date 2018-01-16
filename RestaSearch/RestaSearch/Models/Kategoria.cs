@@ -5,6 +5,8 @@ namespace RestaSearch.Models
 {
 	public class Kategoria
 	{
+		internal object nazwaKategorii;
+
 		//public Kategoria()
 		//{
 		//	this.LokalKategoria = new HashSet<LokalKategoria>();
@@ -14,15 +16,17 @@ namespace RestaSearch.Models
 		[StringLength(100)]
 		public string NazwaKategorii { get; set; }
 		public string OpisKategorii { get; set; }
-		public string NazwaPlikuIkony { get; set; }
+		public string MyProperty { get; set; }
+										   //	public string NazwaPlikuIkony { get; set; }
 		public bool Ukryty { get; set; }
-		public byte Status { get; set; }
+	//	public byte Status { get; set; }
+	//	public bool Checked { get; set; }
 
 
 
-		public virtual ICollection<Lokal> Lokale { get; set; }
+		//public virtual ICollection<Lokal> Lokale { get; set; }
 
 
-		//public virtual ICollection<LokalKategoria> LokalKategoria { get; private set; }
+		public virtual ICollection<LokalKategoria> LokalKategoria { get; set; }
 	}
 }

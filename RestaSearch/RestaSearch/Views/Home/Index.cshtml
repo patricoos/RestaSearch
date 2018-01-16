@@ -13,10 +13,28 @@
 				<div class="card-header bg-primary text-white text-center">Kategorie</div>
 				<div class=" border ">
 
-					@foreach (var kategoria in Model.Kategorie)
+					@*@foreach (var kategoria in Model.Kategorie)
 					{
 						<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower() })"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
+					}*@
+
+
+					@using (Html.BeginForm("SzukajLista", "Lokale", FormMethod.Get))
+					{
+						<div>
+							@for (var i = 0; i < Model.Kategorie.Count(); i++)
+							{
+								@Html.EditorFor(m => Model.Kategorie[i].Checked)
+								@Html.DisplayFor(m => Model.Kategorie[i].Nazwa)
+								@Html.HiddenFor(m => Model.Kategorie[i].Id)
+							}
+						</div>
+						<input type="submit" value="Submit" />
+						<p>Twoja lokalizacja</p>
+						<input id="Lat" name="Latitude" type="text" value="" />
+							<input id="Long" name="Longitude" type="text" value="" />
 					}
+
 
 					<div class=" m-1">
 						<p>
@@ -55,13 +73,14 @@
 						<li class="nav-item">
 							<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
 						</li>
-					</ul>
+					</ul>5
 
 
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 							<div id="map"></div>
 							<button onclick="getLocation()">Pobierz swoją lokalizacje</button>
+							
 
 						</div>
 						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -83,9 +102,7 @@
 						</div>
 						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
-							<p>Pobierz swoją lokalizacje</p>
-							<input id="Lat" name="Lokal.Lat" type="text" value="" />
-							<input id="Long" name="Lokal.Long" type="text" value="" />
+							
 
 						</div>
 					</div>

@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using RestaSearch.Models;
+using RestaSearch.ViewModels;
+using Klubowo.Core.Models.Locations;
 
 namespace RestaSearch.Controllers
 {
@@ -20,8 +22,9 @@ namespace RestaSearch.Controllers
 		public ActionResult Lista(string nazwaKategorii)
 		{
 			var kategoria = db.Kategorie.Include("Lokale").Where(k => k.NazwaKategorii.ToUpper() == nazwaKategorii.ToUpper()).Single();
-			var lokale = kategoria.Lokale.ToList();
-			return View(lokale);
+			//var lokale = kategoria.Lokale.ToList();
+			//return View(lokale);
+			throw new NotImplementedException();
 		}
 		public ActionResult Szczegoly(int id)
 		{
@@ -51,26 +54,23 @@ namespace RestaSearch.Controllers
 		}
 
 
+		public ActionResult SzukajLista(HomeViewModel model)
+		{
+			
+				var selectedKategorie = model.Kategorie.Where(x => x.Checked).Select(x => x.Id).ToList();
+			
+			var lokale = db.Lokale.Where(x => x.LokalKategoria.Any(b => selectedKategorie.Contains(b.KategoriaId))).ToList();
 
+			if (model.Latitude != null & model.Longitude != null)
+			{
+				double Lat = Double.Parse(model.Latitude, System.Globalization.CultureInfo.InvariantCulture);
+				double Long = Double.Parse(model.Longitude, System.Globalization.CultureInfo.InvariantCulture);
+				var location = new Location(Lat, Long);
 
+				lokale = lokale.OrderBy(x => new Location(Double.Parse(x.Lat, System.Globalization.CultureInfo.InvariantCulture), Double.Parse(x.Long, System.Globalization.CultureInfo.InvariantCulture)).GetDistance(location)).ToList();
 
-		//public ActionResult LokaleSzukajLokalizacja(string y, string x)
-		//{
-		//	double lokUzWys = Konwert(y);
-		//	double lokUzSzer = Konwert(x);
-		//	double wektor;
-
-		//	var lokale = db.Lokale.Where(a => !a.Ukryty).ToList();
-		//	lokale.Add(new Lokal() { NazwaKategorii = "crank arm", KategoriaId = 1234 });
-
-
-		//	return View("Lista", lokale);
-		//}
-
-		//public double Konwert(string value) {
-		//	double lok = Convert.ToDouble(value);
-		//	return lok;
-		//}
-
+			}
+			return View("Lista", lokale);
+		}
 	}
 }

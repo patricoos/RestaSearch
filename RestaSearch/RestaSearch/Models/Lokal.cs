@@ -43,9 +43,9 @@ namespace RestaSearch.Models
 		public virtual Miejscowosc Miejscowosc { get; set; }
 
 
-		public int KategoriaId { get; set; }
-		public virtual Kategoria Kategoria { get; set; }
+	//	public int KategoriaId { get; set; }
+	//	public virtual Kategoria Kategoria { get; set; }
 
-		//public virtual ICollection<LokalKategoria> LokalKategoria { get; private set; }
+		public virtual ICollection<LokalKategoria> LokalKategoria { get; set; }
 	}
 }
