@@ -160,7 +160,10 @@ namespace RestaSearch.Controllers
 			}
 
 			var result = new EditLokalViewModel();
-			result.Kategorie = db.Kategorie.ToList().Select(x => new KategoriaViewModel(x)).ToList();
+			result.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+			result.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+			result.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+			result.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 			result.Miejscowosci = db.Miejscowosci.ToList();
 			result.Lokal = lokal;
 			result.Potwierdzenie = potwierdzenie;
@@ -205,8 +208,13 @@ namespace RestaSearch.Controllers
 
 						db.Lokale.Add(model.Lokal);
 
+						var CheckedKategorie = model.Kategorie1;
+						CheckedKategorie.AddRange(model.Kategorie2);
+						CheckedKategorie.AddRange(model.Kategorie3);
+						CheckedKategorie.AddRange(model.Kategorie4);
 
-						foreach (var item in model.Kategorie.Where(x => x.Checked))
+
+						foreach (var item in CheckedKategorie.Where(x => x.Checked))
 						{
 							var lokalKategoria = new LokalKategoria();
 							lokalKategoria.KategoriaId = item.Id;
@@ -223,7 +231,10 @@ namespace RestaSearch.Controllers
 					{
 
 						var kategorie = db.Kategorie.ToList();
-						model.Kategorie = db.Kategorie.ToList().Select(x => new KategoriaViewModel(x)).ToList();
+						model.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+						model.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+						model.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+						model.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 						var miejscowosci = db.Miejscowosci.ToList();
 						model.Miejscowosci = miejscowosci;
 
@@ -235,7 +246,10 @@ namespace RestaSearch.Controllers
 					ModelState.AddModelError("", "Nie wskazano pliku");
 
 					var kategorie = db.Kategorie.ToList();
-					model.Kategorie = db.Kategorie.ToList().Select(x => new KategoriaViewModel(x)).ToList();
+					model.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+					model.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+					model.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+					model.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 					var miejscowosci = db.Miejscowosci.ToList();
 					model.Miejscowosci = miejscowosci;
 					return View(model);

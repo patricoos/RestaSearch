@@ -8,8 +8,10 @@ namespace RestaSearch.ViewModels
 {
 	public class HomeViewModel
 	{
-		//public List<Kategoria> Kategorie { get; set; }
-		public List<KategoriaViewModel> Kategorie { get; set; }
+		public List<KategoriaViewModel> Kategorie1 { get; set; }
+		public List<KategoriaViewModel> Kategorie2 { get; set; }
+		public List<KategoriaViewModel> Kategorie3 { get; set; }
+		public List<KategoriaViewModel> Kategorie4 { get; set; }
 		public IEnumerable<Lokal> Nowosci { get; set; }
 		public IEnumerable<Lokal> Promowane { get; set; }
 	

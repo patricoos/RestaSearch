@@ -14,26 +14,30 @@
 				<div class=" border ">
 
 					@*@foreach (var kategoria in Model.Kategorie)
-					{
-						<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower() })"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
-					}*@
+						{
+							<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower() })"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
+						}*@
 
 
-					@using (Html.BeginForm("SzukajLista", "Lokale", FormMethod.Get))
+					@using (Html.BeginForm("Lista", "Lokale", FormMethod.Get))
 					{
 						<div>
-							@for (var i = 0; i < Model.Kategorie.Count(); i++)
+							@for (var i = 0; i < Model.Kategorie1.Count(); i++)
 							{
-								@Html.EditorFor(m => Model.Kategorie[i].Checked)
-								@Html.DisplayFor(m => Model.Kategorie[i].Nazwa)
-								@Html.HiddenFor(m => Model.Kategorie[i].Id)
+								<label class="btn btn-outline-primary m-1">
+									@Html.EditorFor(m => Model.Kategorie1[i].Checked)
+									@Html.DisplayFor(m => Model.Kategorie1[i].Nazwa)
+									@Html.HiddenFor(m => Model.Kategorie1[i].Id)
+								</label>
+
 							}
 						</div>
 						<input type="submit" value="Submit" />
 						<p>Twoja lokalizacja</p>
 						<input id="Lat" name="Latitude" type="text" value="" />
-							<input id="Long" name="Longitude" type="text" value="" />
-					}
+						<input id="Long" name="Longitude" type="text" value="" />
+
+					<input class="format" type="button" value="Wyczyść Lokalizacje" onclick="wpiszLat(''); wpiszLong('');">
 
 
 					<div class=" m-1">
@@ -44,19 +48,44 @@
 							<div class="card card-body">
 								<h3>Rodzaj kuchni</h3>
 								<p>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Włoska</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Ślaska</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Azjatycka</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Polska</button>
+									@for (var i = 0; i < Model.Kategorie2.Count(); i++)
+									{
+										<label class="btn btn-outline-primary m-1">
+											@Html.EditorFor(m => Model.Kategorie2[i].Checked)
+											@Html.DisplayFor(m => Model.Kategorie2[i].Nazwa)
+											@Html.HiddenFor(m => Model.Kategorie2[i].Id)
+										</label>
+
+									}
+								</p>
+								<h3>Dania</h3>
+								<p>
+									@for (var i = 0; i < Model.Kategorie3.Count(); i++)
+									{
+										<label class="btn btn-outline-primary m-1">
+											@Html.EditorFor(m => Model.Kategorie3[i].Checked)
+											@Html.DisplayFor(m => Model.Kategorie3[i].Nazwa)
+											@Html.HiddenFor(m => Model.Kategorie3[i].Id)
+										</label>
+
+									}
 								</p>
 								<h3>Inne</h3>
 								<p>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Sala Weselna</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Imprezy Firmowe</button>
+									@for (var i = 0; i < Model.Kategorie4.Count(); i++)
+									{
+										<label class="btn btn-outline-primary m-1">
+											@Html.EditorFor(m => Model.Kategorie4[i].Checked)
+											@Html.DisplayFor(m => Model.Kategorie4[i].Nazwa)
+											@Html.HiddenFor(m => Model.Kategorie4[i].Id)
+										</label>
+
+									}
 								</p>
 							</div>
 						</div>
 					</div>
+					}
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -73,14 +102,14 @@
 						<li class="nav-item">
 							<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
 						</li>
-					</ul>5
+					</ul>
 
 
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 							<div id="map"></div>
 							<button onclick="getLocation()">Pobierz swoją lokalizacje</button>
-							
+
 
 						</div>
 						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -102,11 +131,11 @@
 						</div>
 						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
-							
+
 
 						</div>
 					</div>
-					</div>
+				</div>
 
 			</div>
 			<div class="col-md-12 text-center">
@@ -308,5 +337,4 @@
 		height: 400px;
 		width: 100%;
 	}
-
 </style>

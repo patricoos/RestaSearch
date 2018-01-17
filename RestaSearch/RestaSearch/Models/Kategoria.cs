@@ -5,28 +5,22 @@ namespace RestaSearch.Models
 {
 	public class Kategoria
 	{
-		internal object nazwaKategorii;
-
-		//public Kategoria()
-		//{
-		//	this.LokalKategoria = new HashSet<LokalKategoria>();
-		//}
-
 		public int KategoriaId { get; set; }
 		[StringLength(100)]
 		public string NazwaKategorii { get; set; }
 		public string OpisKategorii { get; set; }
 		public string MyProperty { get; set; }
-										   //	public string NazwaPlikuIkony { get; set; }
 		public bool Ukryty { get; set; }
-	//	public byte Status { get; set; }
-	//	public bool Checked { get; set; }
-
-
-
-		//public virtual ICollection<Lokal> Lokale { get; set; }
-
+		public Typ Typ { get; set; }
+		public string NazwaPlikuIkony { get; set; }
 
 		public virtual ICollection<LokalKategoria> LokalKategoria { get; set; }
+	}
+	public enum Typ 
+	{
+		Rodzaj,
+		Kuchnia,
+		Danie,
+		Inne
 	}
 }

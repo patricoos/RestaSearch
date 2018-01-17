@@ -20,17 +20,27 @@ namespace RestaSearch.DAL
 		{
 			var kategorie = new List<Kategoria>
 			{
-				new Kategoria() { KategoriaId=1, NazwaKategorii="Restauracja",	 OpisKategorii="Opis123" },
-				new Kategoria() { KategoriaId=2, NazwaKategorii="Pizzeria",		 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=3, NazwaKategorii="Fast Food",	 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=4, NazwaKategorii="Kebab",		 OpisKategorii="Fotele Opis" },
-				new Kategoria() { KategoriaId=5, NazwaKategorii="Kawiarnia i Herbaciarnia",  OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=6, NazwaKategorii="Cukiernia",	 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=7, NazwaKategorii="Piekarnia",	 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=8, NazwaKategorii="Food Track",	 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=9, NazwaKategorii="Pub",			 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=10, NazwaKategorii="Lodziarnie",	 OpisKategorii="Opis" },
-				new Kategoria() { KategoriaId=10, NazwaKategorii="Cukiernie",    OpisKategorii="Opis" }
+				new Kategoria() { KategoriaId=1, NazwaKategorii="Restauracja",	 OpisKategorii="Opis123", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=2, NazwaKategorii="Pizzeria",		 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=3, NazwaKategorii="Fast Food",	 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=4, NazwaKategorii="Kebab",		 OpisKategorii="Fotele Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=5, NazwaKategorii="Kawiarnia i Herbaciarnia",  OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=6, NazwaKategorii="Cukiernia",	 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=7, NazwaKategorii="Piekarnia",	 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=8, NazwaKategorii="Food Track",	 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=9, NazwaKategorii="Pub",			 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=10, NazwaKategorii="Lodziarnie",	 OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=10, NazwaKategorii="Cukiernie",    OpisKategorii="Opis", Typ=Typ.Rodzaj },
+				new Kategoria() { KategoriaId=11, NazwaKategorii="Lasagne",    OpisKategorii="Opis", Typ=Typ.Danie },
+				new Kategoria() { KategoriaId=12, NazwaKategorii="Pizza",    OpisKategorii="Opis", Typ=Typ.Danie },
+				new Kategoria() { KategoriaId=13, NazwaKategorii="Kluski",    OpisKategorii="Opis", Typ=Typ.Danie },
+				new Kategoria() { KategoriaId=14, NazwaKategorii="Włoska",    OpisKategorii="Opis", Typ=Typ.Kuchnia },
+				new Kategoria() { KategoriaId=15, NazwaKategorii="Śląska",    OpisKategorii="Opis", Typ=Typ.Kuchnia },
+				new Kategoria() { KategoriaId=16, NazwaKategorii="Azjatycka",    OpisKategorii="Opis", Typ=Typ.Kuchnia },
+				new Kategoria() { KategoriaId=17, NazwaKategorii="Sala Weselna",    OpisKategorii="Opis", Typ=Typ.Inne },
+				new Kategoria() { KategoriaId=18, NazwaKategorii="Hotel",    OpisKategorii="Opis", Typ=Typ.Inne },
+				new Kategoria() { KategoriaId=19, NazwaKategorii="Imprezy Firmowe",    OpisKategorii="Opis", Typ=Typ.Inne },
+
 			};
 			kategorie.ForEach(k => context.Kategorie.Add(k));
 			context.SaveChanges();

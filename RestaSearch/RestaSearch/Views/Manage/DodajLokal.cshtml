@@ -61,25 +61,58 @@
 					<td>@Html.TextAreaFor(o => o.Lokal.Opis, new { rows = "5" })</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.Opis)</td>
 				</tr>
-				@*<tr>
-						<td>@Html.LabelFor(o => o.Kategorie, "Kategoria:")</td>
-						<td>@Html.DropDownListFor(m => m.Lokal.KategoriaId, new SelectList(Model.Kategorie, "KategoriaId", "NazwaKategorii", Model.Kategorie.First().KategoriaId))</td>
-						<td></td>
-					</tr>*@
 
 				<tr>
-					<td>@Html.LabelFor(model => model.Kategorie, "Kategoria:")</td>
+					<td>@Html.LabelFor(model => model.Kategorie1, "Kategoria - Rodzaj Lokalu:")</td>
 				</tr>
 				<tr>
-					<td>
-						@for (var i = 0; i < Model.Kategorie.Count(); i++)
+					<td colspan="2">
+						@for (var i = 0; i < Model.Kategorie1.Count(); i++)
 						{
-							@Html.EditorFor(m => Model.Kategorie[i].Checked)
-							@Html.DisplayFor(m => Model.Kategorie[i].Nazwa)
-							@Html.HiddenFor(m => Model.Kategorie[i].Id)
+							@Html.EditorFor(m => Model.Kategorie1[i].Checked)
+							@Html.DisplayFor(m => Model.Kategorie1[i].Nazwa)
+							@Html.HiddenFor(m => Model.Kategorie1[i].Id)
 						}
 					</td>
-					<td></td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(model => model.Kategorie2, "Kategoria - Kuchnia:")</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						@for (var i = 0; i < Model.Kategorie2.Count(); i++)
+						{
+							@Html.EditorFor(m => Model.Kategorie2[i].Checked)
+							@Html.DisplayFor(m => Model.Kategorie2[i].Nazwa)
+							@Html.HiddenFor(m => Model.Kategorie2[i].Id)
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(model => model.Kategorie3, "Kategoria - Serwowane Dania:")</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						@for (var i = 0; i < Model.Kategorie3.Count(); i++)
+						{
+							@Html.EditorFor(m => Model.Kategorie3[i].Checked)
+							@Html.DisplayFor(m => Model.Kategorie3[i].Nazwa)
+							@Html.HiddenFor(m => Model.Kategorie3[i].Id)
+						}
+					</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(model => model.Kategorie4, "Kategoria - Inne:")</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						@for (var i = 0; i < Model.Kategorie4.Count(); i++)
+						{
+							@Html.EditorFor(m => Model.Kategorie4[i].Checked)
+							@Html.DisplayFor(m => Model.Kategorie4[i].Nazwa)
+							@Html.HiddenFor(m => Model.Kategorie4[i].Id)
+						}
+					</td>
 				</tr>
 
 				<tr>
