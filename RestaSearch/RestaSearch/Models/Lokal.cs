@@ -29,23 +29,34 @@ namespace RestaSearch.Models
 		public string KodPocztowy { get; set; }
 		public string NazwMiejscowosc { get; set; }
 
-
-		public int MiejscowoscId { get; set; }
-
 		public string NazwaPlikuObrazka { get; set; }
 		public bool Ukryty { get; set; }
-		public bool Promowany { get; set; }
 		public int Wyswietlenia { get; set; }
 
 		public string Lat { get; set; }
 		public string Long { get; set; }
 
-		public virtual Miejscowosc Miejscowosc { get; set; }
+		//public int MiejscowoscId { get; set; }
+		//public virtual Miejscowosc Miejscowosc { get; set; }
+
+		public StatusLokalu StatusLokalu { get; set; }
+		
 
 
-	//	public int KategoriaId { get; set; }
-	//	public virtual Kategoria Kategoria { get; set; }
+		public string UserId { get; set; }
+		public virtual ApplicationUser User { get; set; }
 
 		public virtual ICollection<LokalKategoria> LokalKategoria { get; set; }
+
+		//public int UzytkownikId { get; set; }
+		//public virtual Uzytkownik Uzytkownik { get; set; }
+
 	}
+	public enum StatusLokalu
+		{
+			Nowy,
+			Widoczny,
+			Promowany,
+			Zablokowany
+		}
 }

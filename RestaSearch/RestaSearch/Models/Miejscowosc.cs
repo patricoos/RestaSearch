@@ -12,8 +12,5 @@ namespace RestaSearch.Models
 		public Region Region { get; set; }
 
 		public virtual ICollection<Lokal> Lokal { get; private set; }
-
-
-		public virtual ICollection<Uzytkownik> Uzytkownik { get; private set; }
 	}
 }

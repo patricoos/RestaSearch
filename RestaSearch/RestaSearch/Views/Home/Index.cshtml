@@ -8,19 +8,15 @@
 
 <div class="bg-light ">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="card-header bg-primary text-white text-center">Kategorie</div>
-				<div class=" border ">
+		
+			<div class="row">
 
-					@*@foreach (var kategoria in Model.Kategorie)
-						{
-							<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower() })"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
-						}*@
-
-
-					@using (Html.BeginForm("Lista", "Lokale", FormMethod.Get))
-					{
+				<div class="col-md-6">
+					<div class="card-header bg-primary text-white text-center">Kategorie</div>
+					
+@using (Html.BeginForm("Lista", "Lokale", FormMethod.Get))
+{
+	<div class=" border ">
 						<div>
 							@for (var i = 0; i < Model.Kategorie1.Count(); i++)
 							{
@@ -32,309 +28,333 @@
 
 							}
 						</div>
-						<input type="submit" value="Submit" />
+						<input class="btn btn-secondary" type="submit" value="Submit" />
 						<p>Twoja lokalizacja</p>
 						<input id="Lat" name="Latitude" type="text" value="" />
 						<input id="Long" name="Longitude" type="text" value="" />
 
-					<input class="format" type="button" value="Wyczyść Lokalizacje" onclick="wpiszLat(''); wpiszLong('');">
+						
 
 
-					<div class=" m-1">
-						<p>
-							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
-						</p>
-						<div class="collapse" id="collapseExample">
-							<div class="card card-body">
-								<h3>Rodzaj kuchni</h3>
-								<p>
-									@for (var i = 0; i < Model.Kategorie2.Count(); i++)
-									{
-										<label class="btn btn-outline-primary m-1">
-											@Html.EditorFor(m => Model.Kategorie2[i].Checked)
-											@Html.DisplayFor(m => Model.Kategorie2[i].Nazwa)
-											@Html.HiddenFor(m => Model.Kategorie2[i].Id)
-										</label>
+						<div class=" m-1">
+							<p>
+								<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
+							</p>
+							<div class="collapse" id="collapseExample">
+								<div class="card card-body">
+									<h3>Rodzaj kuchni</h3>
+									<p>
+										@for (var i = 0; i < Model.Kategorie2.Count(); i++)
+										{
+											<label class="btn btn-outline-primary m-1">
+												@Html.EditorFor(m => Model.Kategorie2[i].Checked)
+												@Html.DisplayFor(m => Model.Kategorie2[i].Nazwa)
+												@Html.HiddenFor(m => Model.Kategorie2[i].Id)
+											</label>
 
-									}
-								</p>
-								<h3>Dania</h3>
-								<p>
-									@for (var i = 0; i < Model.Kategorie3.Count(); i++)
-									{
-										<label class="btn btn-outline-primary m-1">
-											@Html.EditorFor(m => Model.Kategorie3[i].Checked)
-											@Html.DisplayFor(m => Model.Kategorie3[i].Nazwa)
-											@Html.HiddenFor(m => Model.Kategorie3[i].Id)
-										</label>
+										}
+									</p>
+									<h3>Dania</h3>
+									<p>
+										@for (var i = 0; i < Model.Kategorie3.Count(); i++)
+										{
+											<label class="btn btn-outline-primary m-1">
+												@Html.EditorFor(m => Model.Kategorie3[i].Checked)
+												@Html.DisplayFor(m => Model.Kategorie3[i].Nazwa)
+												@Html.HiddenFor(m => Model.Kategorie3[i].Id)
+											</label>
 
-									}
-								</p>
-								<h3>Inne</h3>
-								<p>
-									@for (var i = 0; i < Model.Kategorie4.Count(); i++)
-									{
-										<label class="btn btn-outline-primary m-1">
-											@Html.EditorFor(m => Model.Kategorie4[i].Checked)
-											@Html.DisplayFor(m => Model.Kategorie4[i].Nazwa)
-											@Html.HiddenFor(m => Model.Kategorie4[i].Id)
-										</label>
+										}
+									</p>
+									<h3>Inne</h3>
+									<p>
+										@for (var i = 0; i < Model.Kategorie4.Count(); i++)
+										{
+											<label class="btn btn-outline-primary m-1">
+												@Html.EditorFor(m => Model.Kategorie4[i].Checked)
+												@Html.DisplayFor(m => Model.Kategorie4[i].Nazwa)
+												@Html.HiddenFor(m => Model.Kategorie4[i].Id)
+											</label>
 
-									}
-								</p>
+										}
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					}
+}
 				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card-header bg-primary text-white text-center">Miejscowość</div>
-				<div class=" my-0 border">
+				<div class="col-md-6">
+					<div class="card-header bg-primary text-white text-center">Miejscowość</div>
+					<div class=" my-0 border">
 
-					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active btn btn-outline-primary m-1" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Wybierz miejscowość</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link btn btn-outline-primary m-1" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Wyzacz na mapie</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
-						</li>
-					</ul>
-
-
-					<div class="tab-content" id="pills-tabContent">
-						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-							<div id="map"></div>
-							<button onclick="getLocation()">Pobierz swoją lokalizacje</button>
+						@*<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active btn btn-outline-primary m-1" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Wybierz miejscowość</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn btn-outline-primary m-1" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Wyzacz na mapie</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+								</li>
+							</ul>*@
 
 
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+								<input id="pac-input" class="form-control mr-sm-0 w-75" type="text" placeholder="Wpisz swój adres" aria-label="Search">	
+								<div id="map"></div>
+
+								<button class="btn btn-primary" onclick="getLocation()">Pobierz swoją lokalizacje</button>
+								<input class="btn btn-primary" type="button" value="Wyczyść Lokalizacje" onclick="wyczysc();">
+
+							</div>
+							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<form class="form-inline  my-1">
+									<input id="pac-input" class="form-control mr-sm-0 w-75" type="text" placeholder="Wpisz swój adres" aria-label="Search">
+									@*<div class="form-group col-md-0">
+											<select id="inputState" class="form-control">
+												<option selected="">+ 0 km</option>
+												<option>+ 5 km</option>
+												<option>+ 10 km</option>
+												<option>+ 15 km</option>
+												<option>+ 30 km</option>
+												<option>+ 50 km</option>
+												<option>+ 75 km</option>
+											</select>
+										</div>*@
+									@*@Html.DropDownListFor(m => m.Miejscowosci, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa"))*@
+								</form>
+							</div>
+							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+
+
+							</div>
 						</div>
-						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-							<form class="form-inline  my-1">
-								<input id="pac-input" class="form-control mr-sm-0 w-75" type="text" placeholder="Wpisz swój adres" aria-label="Search">
-								<div class="form-group col-md-0">
-									<select id="inputState" class="form-control">
-										<option selected="">+ 0 km</option>
-										<option>+ 5 km</option>
-										<option>+ 10 km</option>
-										<option>+ 15 km</option>
-										<option>+ 30 km</option>
-										<option>+ 50 km</option>
-										<option>+ 75 km</option>
-									</select>
-								</div>
-								@*@Html.DropDownListFor(m => m.Miejscowosci, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa"))*@
-							</form>
-						</div>
-						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-
-
-
+					</div>
+					
+				</div>
+				<div class="col-md-12 text-center">
+					<div class="row m-2">
+						<div class="col-md-12 text-center">
+							<input type="submit" class="btn w-25 btn-secondary" value="Szukaj">
 						</div>
 					</div>
 				</div>
+				
 
 			</div>
-			<div class="col-md-12 text-center">
-				<div class="row m-2">
-					<div class="col-md-12 text-center">
-						<a href="#" class="btn w-25 btn-secondary" target="">Szukaj</a>
+		</div>
+	</div>
+
+	<div class="p-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="">Promowane&nbsp;Lokale </h1>
+				</div>
+			</div>
+			<div class="row">
+				@foreach (var promowane in Model.Promowane)
+				{
+					<div class="col-md-3">
+						<a href="@Url.Action("Szczegoly", "Lokale", new {id= promowane.LokalId })">
+							<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(promowane.NazwaPlikuObrazka)">
+						</a>
+						<p class="blockquote">@promowane.NazwaLokalu</p>
+						<p class="font-weight-light">
+							<b>@promowane.NazwMiejscowosc</b> - @promowane.Ulica @promowane.NumerBudynku
+
+							<br>Dzisiaj otwarte - 11:00–23:00
+						</p>
+
 					</div>
-				</div>
+				}
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="p-1">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="">Promowane&nbsp;Lokale </h1>
+	<div class="p-1 bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="">Najczesciej odwiedzane</h1>
+				</div>
+			</div>
+			<div class="row">
+				@foreach (var najwys in Model.NajWyswietlen)
+				{
+					<div class="col-md-3">
+						<a href="@Url.Action("Szczegoly", "Lokale", new { id= najwys.LokalId })">
+							<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(najwys.NazwaPlikuObrazka)">
+						</a>
+						<p class="blockquote">@najwys.NazwaLokalu</p>
+						<p class="font-weight-light">
+							<b>@najwys.NazwMiejscowosc</b> - @najwys.Ulica @najwys.NumerBudynku
+							<br>Dzisiaj otwarte - 11:00–23:00
+						</p>
+					</div>
+				}
 			</div>
 		</div>
-		<div class="row">
-			@foreach (var promowane in Model.Promowane)
-			{
-				<div class="col-md-3">
-					<a href="@Url.Action("Szczegoly", "Lokale", new {id= promowane.LokalId })">
-						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(promowane.NazwaPlikuObrazka)">
-					</a>
-					<p class="blockquote">@promowane.NazwaLokalu</p>
-					<p class="font-weight-light">
-						<b>@promowane.Miejscowosc.Nazwa</b> - @promowane.Ulica @promowane.NumerBudynku
-
-						<br>Dzisiaj otwarte - 11:00–23:00
-					</p>
-
-				</div>
-			}
-		</div>
 	</div>
-</div>
 
-<div class="p-1 bg-light">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="">Najczesciej odwiedzane</h1>
+	<div class="p-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="">Nowe Lokale</h1>
+				</div>
+			</div>
+			<div class="row">
+				@foreach (var nowosci in Model.Nowosci)
+				{
+					<div class="col-md-3">
+						<a href="@Url.Action("Szczegoly", "Lokale", new {id= nowosci.LokalId })">
+							<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(nowosci.NazwaPlikuObrazka)">
+						</a>
+						<p class="blockquote">@nowosci.NazwaLokalu</p>
+						<p class="font-weight-light">
+							<b>@nowosci.NazwMiejscowosc</b>  - @nowosci.Ulica @nowosci.NumerBudynku
+							<br>Dzisiaj otwarte - 11:00–23:00
+						</p>
+					</div>
+				}
 			</div>
 		</div>
-		<div class="row">
-			@foreach (var najwys in Model.NajWyswietlen)
-			{
-				<div class="col-md-3">
-					<a href="@Url.Action("Szczegoly", "Lokale", new { id= najwys.LokalId })">
-						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(najwys.NazwaPlikuObrazka)">
-					</a>
-					<p class="blockquote">@najwys.NazwaLokalu</p>
-					<p class="font-weight-light">
-						<b>@najwys.Miejscowosc.Nazwa</b> - @najwys.Ulica @najwys.NumerBudynku
-						<br>Dzisiaj otwarte - 11:00–23:00
-					</p>
-				</div>
-			}
-		</div>
 	</div>
-</div>
-
-<div class="p-1">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h1 class="">Nowe Lokale</h1>
-			</div>
-		</div>
-		<div class="row">
-			@foreach (var nowosci in Model.Nowosci)
-			{
-				<div class="col-md-3">
-					<a href="@Url.Action("Szczegoly", "Lokale", new {id= nowosci.LokalId })">
-						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(nowosci.NazwaPlikuObrazka)">
-					</a>
-					<p class="blockquote">@nowosci.NazwaLokalu</p>
-					<p class="font-weight-light">
-						<b>@nowosci.Miejscowosc.Nazwa</b>  - @nowosci.Ulica @nowosci.NumerBudynku
-						<br>Dzisiaj otwarte - 11:00–23:00
-					</p>
-				</div>
-			}
-		</div>
-	</div>
-</div>
 
 
 
 
-<script>
-	var markers = [];
-	var map;
+	<script>
+		var markers = [];
+		var map;
 
-	function initAutocomplete() {
-		map = new google.maps.Map(document.getElementById('map'), {
-			center: { lat: 52.157758, lng: 19.1271972 },
-			zoom: 6,
-			mapTypeId: 'roadmap'
-		});
-
-		// Create the search box and link it to the UI element.
-		var input = document.getElementById('pac-input');
-		var searchBox = new google.maps.places.SearchBox(input);
-		//        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-		// Bias the SearchBox results towards current map's viewport.
-		map.addListener('bounds_changed', function () {
-			searchBox.setBounds(map.getBounds());
-		});
-		map.addListener('click', function (event) {
-
-			konwert(event.latLng);
-			addMarker(event.latLng);
-		});
-
-
-		// Listen for the event fired when the user selects a prediction and retrieve
-		// more details for that place.
-		searchBox.addListener('places_changed', function () {
-			var places = searchBox.getPlaces();
-
-			if (places.length == 0) {
-				return;
-			}
-
-			// Clear out the old markers.
-			markers.forEach(function (marker) {
-				marker.setMap(null);
+		function initAutocomplete() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: { lat: 52.157758, lng: 19.1271972 },
+				zoom: 6,
+				mapTypeId: 'roadmap'
 			});
-			markers = [];
 
-			// For each place, get the icon, name and location.
-			var bounds = new google.maps.LatLngBounds();
-			places.forEach(function (place) {
-				if (!place.geometry) {
-					console.log("Returned place contains no geometry");
+			// Create the search box and link it to the UI element.
+			var input = document.getElementById('pac-input');
+			var searchBox = new google.maps.places.SearchBox(input);
+			//        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+			// Bias the SearchBox results towards current map's viewport.
+			map.addListener('bounds_changed', function () {
+				searchBox.setBounds(map.getBounds());
+			});
+			map.addListener('click', function (event) {
+				wyczysc();
+				konwert(event.latLng);
+				addMarker(event.latLng);
+			});
+
+
+			// Listen for the event fired when the user selects a prediction and retrieve
+			// more details for that place.
+			searchBox.addListener('places_changed', function () {
+				var places = searchBox.getPlaces();
+
+				if (places.length == 0) {
 					return;
 				}
 
-				konwert(place.geometry.location);
+				// Clear out the old markers.
+				markers.forEach(function (marker) {
+					marker.setMap(null);
+				});
+				markers = [];
 
-				// Create a marker for each place.
-				markers.push(new google.maps.Marker({
-					map: map,
-					//          	icon: icon,
-					//              title: place.name,
-					position: place.geometry.location
-				}));
+				// For each place, get the icon, name and location.
+				var bounds = new google.maps.LatLngBounds();
+				places.forEach(function (place) {
+					if (!place.geometry) {
+						console.log("Returned place contains no geometry");
+						return;
+					}
 
-				if (place.geometry.viewport) {
-					// Only geocodes have viewport.
-					bounds.union(place.geometry.viewport);
-				} else {
-					bounds.extend(place.geometry.location);
-				}
+					konwert(place.geometry.location);
+
+					// Create a marker for each place.
+					markers.push(new google.maps.Marker({
+						map: map,
+						//          	icon: icon,
+						//              title: place.name,
+						position: place.geometry.location
+					}));
+
+					if (place.geometry.viewport) {
+						// Only geocodes have viewport.
+						bounds.union(place.geometry.viewport);
+					} else {
+						bounds.extend(place.geometry.location);
+					}
+				});
+				map.fitBounds(bounds);
 			});
-			map.fitBounds(bounds);
-		});
-	}
-
-	function addMarker(location) {
-		setMapOnAll(null);
-		markers = [];
-		punkt = new google.maps.Marker({
-			position: location,
-			map: map
-		});
-		markers.push(punkt);
-	}
-
-	function setMapOnAll(j) {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(j);
 		}
-	}
 
-	function konwert(lok) {
-		var p = lok.toString();
-		var w = p.slice(1, p.indexOf(","));
-		var s = p.slice(p.indexOf(",") + 2, p.length - 1)
-		wpiszLat(w);
-		wpiszLong(s);
-	}
+		function getLocation() {
+			wyczysc();
+			if (navigator.geolocation) {
 
-	function wpiszLat(znak) { document.getElementById("Lat").value = znak; }
-	function wpiszLong(znak) { document.getElementById("Long").value = znak; }
+				navigator.geolocation.getCurrentPosition(function (position) {
+					myLatLng = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
+					addMarker(myLatLng);
+					konwert(myLatLng);
+				});
+			} else {
+				alert('twoja przeglądarka nie wspiera geolokacji...');
+				x.innerHTML = "Geolokacja nie jest obsługiwana przez Twoją wyszukiwarkę.";
+			}
+		}
 
-</script>
+		function konwert(lok) {
+			var p = lok.toString();
+			var w = p.slice(1, p.indexOf(","));
+			var s = p.slice(p.indexOf(",") + 2, p.length - 1)
+			wpiszLat(w);
+			wpiszLong(s);
+		}
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&libraries=places&callback=initAutocomplete"
-		async defer></script>
+		function addMarker(location) {
+			setMapOnAll();
+			markers = [];
+			punkt = new google.maps.Marker({
+				position: location,
+				map: map
+			});
+			markers.push(punkt);
+		}
 
-<style>
-	#map {
-		height: 400px;
-		width: 100%;
-	}
-</style>
+		function setMapOnAll() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+		}
+
+		function wyczysc()
+		{ wpiszLat(''); wpiszLong(''); setMapOnAll(); wyczyscPac();}
+
+		function wpiszLat(znak) { document.getElementById("Lat").value = znak; }
+		function wpiszLong(znak) { document.getElementById("Long").value = znak; }
+		function wyczyscPac() { document.getElementById("pac-input").value = null; }
+
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&libraries=places&callback=initAutocomplete"
+			async defer></script>
+
+	<style>
+		#map {
+			height: 400px;
+			width: 100%;
+		}
+	</style>

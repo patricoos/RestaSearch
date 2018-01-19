@@ -47,6 +47,7 @@ namespace RestaSearch.Controllers
 				return HttpContext.GetOwinContext().Authentication;
 			}
 		}
+		[Authorize]
 		public async Task<ActionResult> Index(ManageMessageId? message)
 		{
 			var name = User.Identity.Name;
@@ -145,6 +146,7 @@ namespace RestaSearch.Controllers
 			}
 		}
 
+		[Authorize]
 		public ActionResult DodajLokal(int? lokalId, bool? potwierdzenie)
 		{
 			Lokal lokal;
@@ -164,7 +166,7 @@ namespace RestaSearch.Controllers
 			result.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 			result.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 			result.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
-			result.Miejscowosci = db.Miejscowosci.ToList();
+			//result.Miejscowosci = db.Miejscowosci.ToList();
 			result.Lokal = lokal;
 			result.Potwierdzenie = potwierdzenie;
 
@@ -173,7 +175,7 @@ namespace RestaSearch.Controllers
 		}
 
 		[HttpPost]
-
+		[Authorize]
 		public ActionResult DodajLokal(EditLokalViewModel model, HttpPostedFileBase file)
 		{
 			if (model.Lokal.LokalId > 0)
@@ -201,9 +203,10 @@ namespace RestaSearch.Controllers
 						model.Lokal.DataDodania = DateTime.Now;
 
 						///////////////////////////////////////////////////////////////////////////////////////  Zmienic na true !! .Ukryty = false;
+						model.Lokal.UserId = User.Identity.GetUserId();
 
 						model.Lokal.Ukryty = false;
-						model.Lokal.Promowany = false;
+						model.Lokal.StatusLokalu = StatusLokalu.Nowy;
 						model.Lokal.Wyswietlenia = 0;
 
 						db.Lokale.Add(model.Lokal);
@@ -235,8 +238,8 @@ namespace RestaSearch.Controllers
 						model.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 						model.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 						model.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
-						var miejscowosci = db.Miejscowosci.ToList();
-						model.Miejscowosci = miejscowosci;
+						//var miejscowosci = db.Miejscowosci.ToList();
+						//model.Miejscowosci = miejscowosci;
 
 						return View(model);
 					}
@@ -250,51 +253,59 @@ namespace RestaSearch.Controllers
 					model.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 					model.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 					model.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
-					var miejscowosci = db.Miejscowosci.ToList();
-					model.Miejscowosci = miejscowosci;
+					//var miejscowosci = db.Miejscowosci.ToList();
+					//model.Miejscowosci = miejscowosci;
 					return View(model);
 				}
 			}
 
 		}
-
-		[Authorize(Roles = "Admin")]
-		public ActionResult UkryjLokal(int lokalId)
+		[Authorize]
+		public ActionResult ListaLokali()
 		{
-			var lokal = db.Lokale.Find(lokalId);
-			lokal.Ukryty = true;
+			var name = User.Identity.Name;
+
+
+			bool isAdmin = User.IsInRole("Admin");
+			ViewBag.UserIsAdmin = isAdmin;
+
+			IEnumerable<Lokal> lokaleUzytkownika;
+
+			// Dla administratora zwracamy wszystkie zamowienia
+			if (isAdmin)
+			{
+				lokaleUzytkownika = db.Lokale.OrderByDescending(o => o.DataDodania).ToArray();
+			}
+			else
+			{
+				var userId = User.Identity.GetUserId();
+				lokaleUzytkownika = db.Lokale.Where(o => o.UserId == userId).OrderByDescending(o => o.DataDodania).ToArray();
+			}
+
+			return View(lokaleUzytkownika);
+		}
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		public StatusLokalu ZmianaStanuLokalu(Lokal lokal)
+		{
+			Lokal lokalDoModyfikacji = db.Lokale.Find(lokal.LokalId);
+			lokalDoModyfikacji.StatusLokalu = lokal.StatusLokalu;
 			db.SaveChanges();
 
-			return RedirectToAction("DodajLokal", new { potwierdzenie = true });
+
+			return lokal.StatusLokalu;
 		}
 
 		[Authorize(Roles = "Admin")]
-		public ActionResult PokazLokal(int lokalId)
+		public bool UkryjLokal(Lokal lokal)
 		{
-			var lokal = db.Lokale.Find(lokalId);
-			lokal.Ukryty = false;
+			Lokal lokalDoUkrycia = db.Lokale.Find(lokal.LokalId);
+			lokalDoUkrycia.Ukryty = lokal.Ukryty;
 			db.SaveChanges();
 
-			return RedirectToAction("DodajLokal", new { potwierdzenie = true });
+
+			return lokal.Ukryty;
 		}
 
-		[Authorize(Roles = "Admin")]
-		public ActionResult PromoLokal(int lokalId)
-		{
-			var lokal = db.Lokale.Find(lokalId);
-			lokal.Promowany = true;
-			db.SaveChanges();
-
-			return RedirectToAction("DodajLokal", new { potwierdzenie = true });
-		}
-		[Authorize(Roles = "Admin")]
-		public ActionResult NiePromoLokal(int lokalId)
-		{
-			var lokal = db.Lokale.Find(lokalId);
-			lokal.Promowany = false;
-			db.SaveChanges();
-
-			return RedirectToAction("DodajLokal", new { potwierdzenie = true });
-		}
 	}
 }

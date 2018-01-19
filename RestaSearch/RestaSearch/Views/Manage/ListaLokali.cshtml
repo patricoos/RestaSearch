@@ -1,0 +1,97 @@
+﻿@model IEnumerable<RestaSearch.Models.Lokal>
+@{
+	ViewBag.Title = "ListaLokali";
+	Layout = "~/Views/Shared/_ManageLayout.cshtml";
+}
+
+<div>
+	<hr />
+	<h2 class="manageHeader">Twoje Restauracje</h2>
+
+	<div>
+		@if (Model.Any())
+		{
+			<table id="lokale-table">
+
+				@foreach (var lokal in Model)
+				{
+					<tr>
+						@if (ViewBag.UserIsAdmin)
+						{
+							<td>
+								<strong>Nr Lokalu: </strong><br />@lokal.LokalId
+							</td>
+						}
+						<td>
+							<strong>Nazwa Lokalu: </strong><br />
+							@lokal.NazwaLokalu<br />
+						</td>
+						<td>
+							<strong>Adres: </strong><br />
+							@lokal.KodPocztowy - @lokal.NazwMiejscowosc>
+							@lokal.Ulica @lokal.NumerBudynku  @lokal.NumerLokalu
+						</td>
+						<td>
+							<strong>Data Dodania: </strong><br />
+							@lokal.DataDodania.ToString("dd-MM-yyyy")
+						</td>
+						<td>
+							<strong>Stan: </strong><br />
+
+							@if (ViewBag.UserIsAdmin)
+							{
+								using (Html.BeginForm("ZmianaStanuLokalu", "Manage"))
+								{
+									@Html.HiddenFor(o => lokal.LokalId)
+									@Html.EnumDropDownListFor(o => lokal.StatusLokalu, new { @class = "ZmianaStanuLokalu" })
+								}
+							}
+							else
+							{
+								@Html.DisplayFor(o => lokal.StatusLokalu)
+							}
+						</td>
+
+						@if (ViewBag.UserIsAdmin)
+						{
+							<td> 
+								<strong>Ukryty: </strong><br />
+								using (Html.BeginForm("ZmianaStanuZamowienia", "Manage"))
+								{
+								@Html.HiddenFor(o => lokal.LokalId)
+								@Html.EnumDropDownListFor(o => lokal.StatusLokalu, new { @class = "UkryjLokal" })
+								}
+							</td>
+						}
+
+						@*<td>
+								<strong>Dane uzytkownika:</strong><br />
+								@lokal. @lokal.Uzytkownik.Nazwisko<br />
+								@lokal.Uzytkownik.Adres<br />
+								@lokal.Uzytkownik.KodPocztowy @lokal.Uzytkownik.Miasto<br />
+							</td>*@
+						<td>
+							<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("Szczegoly", "Lokale", new { id = lokal.LokalId })">
+								Zobacz szczegóły
+							</a>
+						</td>
+						<td>
+							<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage", new { lokalId = lokal.LokalId })">
+								Edytuj
+							</a>
+						</td>
+					</tr>
+				}
+			</table>
+		}
+		else
+		{
+			<div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
+				Nie Dodałeś żadnych lokali .
+			</div>
+		}
+		<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage")" >
+			Dodaj Lokal
+		</a>
+	</div>
+</div>

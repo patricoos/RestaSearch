@@ -218,7 +218,6 @@
     <Compile Include="Models\DaneUzytkownika.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\KategoriaViewModel.cs" />
-    <Compile Include="Models\Uzytkownik.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Lokal.cs" />
     <Compile Include="Models\LokalKategoria.cs" />
@@ -227,8 +226,8 @@
     <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Tools\DoubleExtensions.cs" />
-    <Compile Include="Tools\Location.cs" />
+    <Compile Include="Infrastructure\DoubleExtensions.cs" />
+    <Compile Include="Infrastructure\Location.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\EditLokalViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -257,6 +256,7 @@
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Shared\_ManageLayout.cshtml" />
     <Content Include="Views\Manage\DodajLokal.cshtml" />
+    <Content Include="Views\Manage\ListaLokali.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

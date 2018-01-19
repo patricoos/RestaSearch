@@ -27,9 +27,9 @@ namespace RestaSearch.DAL
 		public virtual DbSet<Lokal> Lokale { get; set; }
 		public virtual DbSet<Kategoria> Kategorie { get; set; }
 		public virtual DbSet<LokalKategoria> LokaleKategorie { get; set; }
-		public virtual DbSet<Miejscowosc> Miejscowosci { get; set; }
-		public virtual DbSet<Region> Regiony { get; set; }
-		public virtual DbSet<Panstwo> Panstwa { get; set; }
+		//public virtual DbSet<Miejscowosc> Miejscowosci { get; set; }
+		//public virtual DbSet<Region> Regiony { get; set; }
+		//public virtual DbSet<Panstwo> Panstwa { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

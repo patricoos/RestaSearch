@@ -21,13 +21,14 @@
 					@Html.Partial("_LoginPartial")
 
 					@*<li class="nav-item">
-								<a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
-							</li>
-						</ul>
-						<a class="btn navbar-btn ml-2 text-white btn-secondary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>*@
+					<a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
+				</li>
+
+			<a class="btn navbar-btn ml-2 text-white btn-secondary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>*@
+				</ul>
 			</div>
 		</div>
 	</nav>
@@ -42,10 +43,13 @@
 					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("Index", "Manage")">
 						Twoje dane
 					</a>
-					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("ListaZamowien", "Manage")" style="width: 100px">
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("ListaZamowien", "Manage")">
 						Komentarze
 					</a>
-					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage")" style="width: 100px">
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("ListaLokali", "Manage")">
+						Twoje Restauracje
+					</a>
+					<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage")" >
 						Dodaj Restauracje
 					</a>
 
@@ -54,14 +58,11 @@
 				<div style="overflow: hidden; margin-bottom: 30px;">
 					@if (@User.IsInRole("Admin"))
 					{
-						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajProdukt", "Manage")">
-							Dodaj Produkt
-						</a>
-						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajProdukt", "Manage")">
+						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage")">
 							Dodaj Kategorie
 						</a>
-						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajProdukt", "Manage")">
-							Lista Użytkowników
+						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("ListaKategorii", "Manage")">
+							Lista Kategorii
 						</a>
 						<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Content("~/elmah")">
 							Logi

@@ -27,7 +27,7 @@
 		<div>
 			<table style="margin-left: auto; margin-right: auto;">
 				<tr>
-					<td>@Html.LabelFor(o => o.Lokal.NazwaLokalu, "NazwaLokalu:")</td>
+					<td>@Html.LabelFor(o => o.Lokal.NazwaLokalu, "Nazwa Lokalu:")</td>
 					<td>@Html.TextBoxFor(o => o.Lokal.NazwaLokalu)</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.NazwaLokalu)</td>
 				</tr>
@@ -37,7 +37,7 @@
 					<td>@Html.ValidationMessageFor(o => o.Lokal.NazwMiejscowosc)</td>
 				</tr>
 				<tr>
-					<td>@Html.LabelFor(o => o.Lokal.KodPocztowy, "KodPocztowy:")</td>
+					<td>@Html.LabelFor(o => o.Lokal.KodPocztowy, "Kod Pocztowy:")</td>
 					<td>@Html.TextBoxFor(o => o.Lokal.KodPocztowy)</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.KodPocztowy)</td>
 				</tr>
@@ -47,9 +47,14 @@
 					<td>@Html.ValidationMessageFor(o => o.Lokal.Ulica)</td>
 				</tr>
 				<tr>
-					<td>@Html.LabelFor(o => o.Lokal.NumerBudynku, "NumerBudynku:")</td>
+					<td>@Html.LabelFor(o => o.Lokal.NumerBudynku, "Numer Budynku:")</td>
 					<td>@Html.TextBoxFor(o => o.Lokal.NumerBudynku)</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.NumerBudynku)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.NazwaLokalu, "Nazwa Lokalu: (opcjonelne)")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.NazwaLokalu)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.NazwaLokalu)</td>
 				</tr>
 				<tr>
 					<td>@Html.LabelFor(o => o.Lokal.OpisSkrocony, "Opis skrócony:")</td>
@@ -139,59 +144,11 @@
 					</tr>
 				}
 
-				<tr>
+				@*<tr>
 					<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
 					<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
 					<td></td>
-				</tr>
-
-
-				@if (@User.IsInRole("Admin"))
-				{
-					@*<tr>
-							<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
-							<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
-							<td></td>
-						</tr>*@
-					<tr>
-						<td style="text-align: left">
-							@if (ViewBag.EditMode)
-							{
-								if (Model.Lokal.Ukryty)
-								{
-									<a href="@Url.Action("PokazLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
-										Przywróć
-									</a>
-								}
-								else
-								{
-									<a href="@Url.Action("UkryjLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
-										Usuń
-									</a>
-								}
-							}
-						</td>
-					</tr>
-					<tr>
-						<td style="text-align: left">
-							@if (ViewBag.EditMode)
-							{
-								if (Model.Lokal.Promowany)
-								{
-									<a href="@Url.Action("PromoLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
-										Promowany
-									</a>
-								}
-								else
-								{
-									<a href="@Url.Action("NiePromoLokal", "Manage", new { lokalId = Model.Lokal.LokalId })" style="display: block; margin-top: 15px; font-weight: bold;">
-										Nie Promowany
-									</a>
-								}
-							}
-						</td>
-					</tr>
-				}
+				</tr>*@
 
 			</table>
 			<br />
