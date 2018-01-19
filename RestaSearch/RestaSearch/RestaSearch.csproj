@@ -215,6 +215,11 @@
     </Compile>
     <Compile Include="Infrastructure\AppConfig.cs" />
     <Compile Include="Infrastructure\UrlHelpers.cs" />
+    <Compile Include="Migrations\201801192117529_InitialCreate.cs" />
+    <Compile Include="Migrations\201801192117529_InitialCreate.Designer.cs">
+      <DependentUpon>201801192117529_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DaneUzytkownika.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\KategoriaViewModel.cs" />
@@ -257,6 +262,7 @@
     <Content Include="Views\Shared\_ManageLayout.cshtml" />
     <Content Include="Views\Manage\DodajLokal.cshtml" />
     <Content Include="Views\Manage\ListaLokali.cshtml" />
+    <Content Include="Views\Manage\ListaKategorii.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -269,6 +275,11 @@
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Lokale\" />
     <Folder Include="Views\Kategorie\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801192117529_InitialCreate.resx">
+      <DependentUpon>201801192117529_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -307,5 +307,21 @@ namespace RestaSearch.Controllers
 			return lokal.Ukryty;
 		}
 
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		public ActionResult ListaKategorii()
+		{
+			IEnumerable<Kategoria> listakategorii = db.Kategorie.ToArray();
+				return View(listakategorii);
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		public ActionResult DodajKategorie()
+		{
+			var result = db.Kategorie.ToArray(); ;
+			return View(result);
+		}
+
 	}
 }

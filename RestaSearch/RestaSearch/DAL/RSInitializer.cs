@@ -4,17 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using RestaSearch.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RestaSearch.Migrations;
+using System.Data.Entity.Migrations;
 
 namespace RestaSearch.DAL
 {
-	public class RSInitializer : DropCreateDatabaseAlways<RSContext>
+	public class RSInitializer : MigrateDatabaseToLatestVersion<RSContext, Configuration>
 	{
-
-		protected override void Seed(RSContext context)
-		{
-			SeedRestaSearchData(context);
-			base.Seed(context);
-		}
 
 		public static void SeedRestaSearchData(RSContext context)
 		{
@@ -42,7 +40,7 @@ namespace RestaSearch.DAL
 				new Kategoria() { KategoriaId=19, NazwaKategorii="Imprezy Firmowe",    OpisKategorii="Opis", Typ=Typ.Inne },
 
 			};
-			kategorie.ForEach(k => context.Kategorie.Add(k));
+			kategorie.ForEach(k => context.Kategorie.AddOrUpdate(k));
 			context.SaveChanges();
 
 
@@ -50,7 +48,7 @@ namespace RestaSearch.DAL
 			//{
 			//	new Panstwo() { PanstwoId=1, Nazwa="Polska" }
 			//};
-			//panstw.ForEach(k => context.Panstwa.Add(k));
+			//panstw.ForEach(k => context.Panstwa.AddOrUpdate(k));
 			//context.SaveChanges();
 
 
@@ -73,7 +71,7 @@ namespace RestaSearch.DAL
 			//	new Region() {RegionId=15, Nazwa="Wielkopolskie",       PanstwoId= 1 },
 			//	new Region() {RegionId=16, Nazwa="Zachodniopomorskie",  PanstwoId= 1 }
 			//};
-			//regio.ForEach(k => context.Regiony.Add(k));
+			//regio.ForEach(k => context.Regiony.AddOrUpdate(k));
 			//context.SaveChanges();
 
 			//var miejsc = new List<Miejscowosc>
@@ -86,10 +84,10 @@ namespace RestaSearch.DAL
 			//	new Miejscowosc() {MiejscowoscId= 6, Nazwa="Turawa", RegionId=8}
 
 			//};
-			//miejsc.ForEach(k => context.Miejscowosci.Add(k));
+			//miejsc.ForEach(k => context.Miejscowosci.AddOrUpdate(k));
 			//context.SaveChanges();
 
-			
+
 
 			var lokal = new List<Lokal>
 			{
@@ -107,7 +105,7 @@ namespace RestaSearch.DAL
 				new Lokal() {LokalId=12, NazwaLokalu="Manekin",Opis="Opis PapaJack", DataDodania=DateTime.Now, OpisSkrocony="Opis S PJ", Telefon="666555444", TelefonRezerwacja="111222333", Ukryty=false, Wyswietlenia=12, NazwaPlikuObrazka="12.jpg", NumerBudynku="7/8", /*MiejscowoscId=1,*/ Ulica="plac Wolności", /*KategoriaId=10,*/         Lat="50.6670015", Long="17.924366" }
 
 			};
-			lokal.ForEach(k => context.Lokale.Add(k));
+			lokal.ForEach(k => context.Lokale.AddOrUpdate(k));
 			context.SaveChanges();
 
 			var lokkat = new List<LokalKategoria>
@@ -130,10 +128,41 @@ namespace RestaSearch.DAL
 
 
 			};
-			lokkat.ForEach(k => context.LokaleKategorie.Add(k));
+			lokkat.ForEach(k => context.LokaleKategorie.AddOrUpdate(k));
 			context.SaveChanges();
 
 
+		}
+		public static void SeedUzytkownicy(RSContext db)
+		{
+			var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+			var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+
+			const string name = "admin@restasearch.pl";
+			const string password = "P@ssw0rd";
+			const string roleName = "Admin";
+
+			var user = userManager.FindByName(name);
+			if (user == null)
+			{
+				user = new ApplicationUser { UserName = name, Email = name, DaneUzytkownika = new DaneUzytkownika() };
+				var result = userManager.Create(user, password);
+			}
+
+			// utworzenie roli Admin jeśli nie istnieje 
+			var role = roleManager.FindByName(roleName);
+			if (role == null)
+			{
+				role = new IdentityRole(roleName);
+				var roleresult = roleManager.Create(role);
+			}
+
+			// dodanie uzytkownika do roli Admin jesli juz nie jest w roli
+			var rolesForUser = userManager.GetRoles(user.Id);
+			if (!rolesForUser.Contains(role.Name))
+			{
+				var result = userManager.AddToRole(user.Id, role.Name);
+			}
 		}
 
 	}

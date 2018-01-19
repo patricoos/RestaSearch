@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RestaSearch.Models.Kategoria>
+
+@{
+    ViewBag.Title = "ListaKategorii";
+    Layout = "~/Views/Shared/_ManageLayout.cshtml";
+}
+
+<h2>ListaKategorii</h2>
+
+<div>
+	<hr />
+	<h2 class="manageHeader">Lista Kategorii</h2>
+
+	<div>
+		@if (Model.Any())
+		{
+			<table id="lokale-table">
+
+				@foreach (var kategoria in Model)
+				{
+					<tr>
+							<td>
+								<strong>Nr Lokalu: </strong><br />@kategoria.KategoriaId
+							</td>
+						<td>
+							<strong>Nazwa Kategorii: </strong><br />
+							@kategoria.NazwaKategorii<br />
+						</td>
+						<td>
+							<strong>Opis: </strong><br />
+							@kategoria.OpisKategorii
+						</td>
+						<td>
+							<strong>Typ Kategorii </strong><br />
+							@kategoria.Typ
+						</td>
+						<td>
+							<strong>Ukryty: </strong><br />
+							@kategoria.Ukryty
+						</td>
+						<td>
+							<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage", new { kategoriaId = kategoria.KategoriaId })">
+								Edytuj
+							</a>
+						</td>
+					</tr>
+				}
+			</table>
+		}
+		else
+		{
+			<div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
+				Nie Dodałeś żadnych lokali .
+			</div>
+		}
+		<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage")">
+			Dodaj Kategorie
+		</a>
+	</div>
+</div>
