@@ -9,7 +9,6 @@ namespace RestaSearch.Models
 		[StringLength(100)]
 		public string NazwaKategorii { get; set; }
 		public string OpisKategorii { get; set; }
-		public string MyProperty { get; set; }
 		public bool Ukryty { get; set; }
 		public Typ Typ { get; set; }
 		public string NazwaPlikuIkony { get; set; }

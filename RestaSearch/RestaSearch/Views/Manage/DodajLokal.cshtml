@@ -160,13 +160,15 @@
 			<br />
 			<table style="margin-left: auto; margin-right: auto;">
 				<tr>
-					<td><label for="Lokal_Ulica">Lokalizacja:</label></td>
-					<td><input id="LatLng" type="text" size="35" value="Klikniej na mape aby wybrać lokalizacje" /></td>
+					<td><label for="Lokal_Ulica">Lokalizacja GPS:</label></td>
 				</tr>
-				<tr class="ukryty">
-					<td><input id="Lat" name="Lokal.Lat" type="text" value="" /></td>
-					<td><input id="Long" name="Lokal.Long" type="text" value="" /></td>
+				<tr>
+					<td>@Html.TextBoxFor(o => o.Lokal.Lat)
+					@Html.ValidationMessageFor(o => o.Lokal.Lat)
+					@Html.TextBoxFor(o => o.Lokal.Long)
+					@Html.ValidationMessageFor(o => o.Lokal.Long)</td>
 				</tr>
+
 				<tr>
 					<td style="text-align: right;">
 						<input type="submit" value="Zapisz" class="submitLink" style="height: 40px; margin-right: 0px; margin-top: 30px; font-weight: bold;" />
@@ -245,9 +247,12 @@
 		}
 	}
 
-	function wpiszLatLng(znak) { document.getElementById("LatLng").value = znak; }
-	function wpiszLat(znak) { document.getElementById("Lat").value = znak; }
-	function wpiszLong(znak) { document.getElementById("Long").value = znak; }
+	//if (document.getElementById("Lokal_Lat").value.length !== 0) {
+	//	addMarker({ lat: document.getElementById("Lokal_Lat").value, lng: document.getElementById("Lokal_Long").value });
+	//}
+
+	function wpiszLat(znak) { document.getElementById("Lokal_Lat").value = znak; }
+	function wpiszLong(znak) { document.getElementById("Lokal_Long").value = znak; }
 
 
 </script>

@@ -219,9 +219,14 @@
     <Compile Include="Migrations\201801192117529_InitialCreate.Designer.cs">
       <DependentUpon>201801192117529_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801200409435_edycja.cs" />
+    <Compile Include="Migrations\201801200409435_edycja.Designer.cs">
+      <DependentUpon>201801200409435_edycja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DaneUzytkownika.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\EditKategoriaViewModel.cs" />
     <Compile Include="ViewModels\KategoriaViewModel.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Lokal.cs" />
@@ -263,6 +268,7 @@
     <Content Include="Views\Manage\DodajLokal.cshtml" />
     <Content Include="Views\Manage\ListaLokali.cshtml" />
     <Content Include="Views\Manage\ListaKategorii.cshtml" />
+    <Content Include="Views\Manage\DodajKategorie.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -279,6 +285,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801192117529_InitialCreate.resx">
       <DependentUpon>201801192117529_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801200409435_edycja.resx">
+      <DependentUpon>201801200409435_edycja.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

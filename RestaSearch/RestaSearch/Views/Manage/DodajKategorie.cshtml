@@ -1,0 +1,52 @@
+﻿@model RestaSearch.ViewModels.EditKategoriaViewModel
+@{
+    ViewBag.Title = "Dodaj Kategorie";
+    Layout = "~/Views/Shared/_ManageLayout.cshtml";
+}
+
+<h2>Dodaj Kategorie</h2>
+
+<div>
+	@if (Model.Potwierdzenie.HasValue && Model.Potwierdzenie.Value)
+	{
+		<div style="text-align: center; margin: 50px;">
+			Pomyślnie wprowadzono zmiany!
+		</div>
+	}
+
+	@using (@Html.BeginForm("DodajKategorie", "Manage", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="error-summary-centered">
+			@Html.ValidationSummary()
+		</div>
+		@Html.HiddenFor(o => o.kategoria.KategoriaId)
+
+		<div>
+			<table style="margin-left: auto; margin-right: auto;">
+				<tr>
+					<td>@Html.LabelFor(o => o.kategoria.NazwaKategorii, "Nazwa Kategorii:")</td>
+					<td>@Html.TextBoxFor(o => o.kategoria.NazwaKategorii)</td>
+					<td>@Html.ValidationMessageFor(o => o.kategoria.NazwaKategorii)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.kategoria.OpisKategorii, "Opis:")</td>
+					<td>@Html.TextAreaFor(o => o.kategoria.OpisKategorii, new { rows = "5" })</td>
+					<td>@Html.ValidationMessageFor(o => o.kategoria.OpisKategorii)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.kategoria.Typ, "Typ:")</td>
+					<td>@Html.EnumDropDownListFor(m => m.kategoria.Typ)</td>
+					<td></td>
+				</tr>
+			<tr>
+				<td style="text-align: right;">
+					<input type="submit" value="Zapisz" class="submitLink" style="height: 40px; margin-right: 0px; margin-top: 30px; font-weight: bold;" />
+				</td>
+			</tr>
+		</table>
+		<br />
+	</div>
+	}
+</div>

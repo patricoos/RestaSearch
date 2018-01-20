@@ -202,10 +202,9 @@ namespace RestaSearch.Controllers
 						model.Lokal.NazwaPlikuObrazka = filename;
 						model.Lokal.DataDodania = DateTime.Now;
 
-						///////////////////////////////////////////////////////////////////////////////////////  Zmienic na true !! .Ukryty = false;
 						model.Lokal.UserId = User.Identity.GetUserId();
 
-						model.Lokal.Ukryty = false;
+						model.Lokal.Ukryty = true;
 						model.Lokal.StatusLokalu = StatusLokalu.Nowy;
 						model.Lokal.Wyswietlenia = 0;
 
@@ -284,30 +283,36 @@ namespace RestaSearch.Controllers
 
 			return View(lokaleUzytkownika);
 		}
-		[HttpPost]
 		[Authorize(Roles = "Admin")]
-		public StatusLokalu ZmianaStanuLokalu(Lokal lokal)
+		public ActionResult ZmianaStanuLokalu(int lokalId, StatusLokalu status)
 		{
-			Lokal lokalDoModyfikacji = db.Lokale.Find(lokal.LokalId);
-			lokalDoModyfikacji.StatusLokalu = lokal.StatusLokalu;
+			Lokal lokalDoModyfikacji = db.Lokale.Find(lokalId);
+			lokalDoModyfikacji.StatusLokalu = status;
 			db.SaveChanges();
 
-
-			return lokal.StatusLokalu;
+			return RedirectToAction("ListaLokali");
 		}
 
 		[Authorize(Roles = "Admin")]
-		public bool UkryjLokal(Lokal lokal)
+		public ActionResult UkryjLokal(int lokalId)
 		{
-			Lokal lokalDoUkrycia = db.Lokale.Find(lokal.LokalId);
-			lokalDoUkrycia.Ukryty = lokal.Ukryty;
+			var lokal = db.Lokale.Find(lokalId);
+			lokal.Ukryty = true;
 			db.SaveChanges();
 
-
-			return lokal.Ukryty;
+			return RedirectToAction("ListaLokali");
 		}
 
-		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		public ActionResult PokazLokal(int lokalId)
+		{
+			var lokal = db.Lokale.Find(lokalId);
+			lokal.Ukryty = false;
+			db.SaveChanges();
+
+			return RedirectToAction("ListaLokali");
+		}
+
 		[Authorize(Roles = "Admin")]
 		public ActionResult ListaKategorii()
 		{
@@ -323,5 +328,55 @@ namespace RestaSearch.Controllers
 			return View(result);
 		}
 
+		[Authorize(Roles = "Admin")]
+		public ActionResult DodajKategorie(int? kategoriaId, bool? potwierdzenie)
+		{
+			Kategoria kategoria;
+			if (kategoriaId.HasValue)
+			{
+				ViewBag.EditMode = true;
+				kategoria = db.Kategorie.Find(kategoriaId);
+			}
+			else
+			{
+				ViewBag.EditMode = false;
+				kategoria = new Kategoria();
+			}
+
+			var result = new EditKategoriaViewModel();
+			result.kategoria = kategoria;
+			result.Potwierdzenie = potwierdzenie;
+
+			return View(result);
+
+		}
+
+		[HttpPost]
+		[Authorize(Roles = "Admin")]
+		public ActionResult DodajKategorie(EditKategoriaViewModel model)
+		{
+			if (model.kategoria.KategoriaId > 0)
+			{
+				// modyfikacja kategori
+				db.Entry(model.kategoria).State = EntityState.Modified;
+				db.SaveChanges();
+				return RedirectToAction("DodajKategorie", new { potwierdzenie = true });
+			}
+			else
+			{
+					if (ModelState.IsValid)
+					{
+						model.kategoria.Ukryty = true;
+						db.Kategorie.Add(model.kategoria);
+						db.SaveChanges();
+
+						return RedirectToAction("DodajKategorie", new { potwierdzenie = true });
+					}
+					else
+					{
+						return View(model);
+					}
+			}
+		}
 	}
 }

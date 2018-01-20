@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<RestaSearch.Models.Kategoria>
 
 @{
-    ViewBag.Title = "ListaKategorii";
+    ViewBag.Title = "Lista Kategorii";
     Layout = "~/Views/Shared/_ManageLayout.cshtml";
 }
-
-<h2>ListaKategorii</h2>
 
 <div>
 	<hr />
@@ -14,28 +12,44 @@
 	<div>
 		@if (Model.Any())
 		{
-			<table id="lokale-table">
+			<table id="lokale-table" width="100%">
+
+				<tr>
+					<td>
+						<strong>Nr kategorii: </strong>
+					</td>
+					<td>
+						<strong>Typ Kategorii </strong>
+					</td>
+					<td>
+						<strong>Nazwa Kategorii: </strong>
+					</td>
+					<td>
+						<strong>Opis: </strong>
+					</td>
+					<td>
+						<strong>Ukryty: </strong>
+					</td>
+					<td>
+					</td>
+				</tr>
 
 				@foreach (var kategoria in Model)
 				{
 					<tr>
 							<td>
-								<strong>Nr Lokalu: </strong><br />@kategoria.KategoriaId
+								@kategoria.KategoriaId
 							</td>
 						<td>
-							<strong>Nazwa Kategorii: </strong><br />
-							@kategoria.NazwaKategorii<br />
-						</td>
-						<td>
-							<strong>Opis: </strong><br />
-							@kategoria.OpisKategorii
-						</td>
-						<td>
-							<strong>Typ Kategorii </strong><br />
 							@kategoria.Typ
 						</td>
 						<td>
-							<strong>Ukryty: </strong><br />
+							@kategoria.NazwaKategorii<br />
+						</td>
+						<td>
+							@kategoria.OpisKategorii
+						</td>
+						<td>
 							@kategoria.Ukryty
 						</td>
 						<td>
@@ -50,7 +64,7 @@
 		else
 		{
 			<div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
-				Nie Dodałeś żadnych lokali .
+				Nie Dodałeś żadnych kategorii .
 			</div>
 		}
 		<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage")">
