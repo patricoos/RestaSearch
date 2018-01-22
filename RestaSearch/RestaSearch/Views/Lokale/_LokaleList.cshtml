@@ -1,22 +1,24 @@
-﻿@model IEnumerable<RestaSearch.Models.Lokal>
+﻿@model RestaSearch.ViewModels.SzukajViewModel
 @using RestaSearch.Infrastructure
 
-@foreach (var lokal in Model)
+@*@foreach (var lokal in Model.lo)*@
+@for (var i = 0; i < Model.LokaleList.Count(); i++)
 {
 	<div class="card">
 		<div class="card-header">
-			<h4>@lokal.NazwaLokalu<font color="gray"> - @lokal.NazwMiejscowosc</font> </h4> 
+			<h4>@Model.LokaleList[i].NazwaLokalu<font color="gray"> - @Model.LokaleList[i].NazwMiejscowosc</font> </h4>
 		</div>
 		<div class="card-body">
 			<div class="row">
 				<div class="col-md-4">
-					<a href="@Url.Action("Szczegoly", "Lokale", new { id = lokal.LokalId })">
-						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(lokal.NazwaPlikuObrazka)">
+					<a href="@Url.Action("Szczegoly", "Lokale", new { id = Model.LokaleList[i].LokalId })">
+						<img class="img-fluid d-block" src="@Url.ObrazkiLokaliSciezka(Model.LokaleList[i].NazwaPlikuObrazka)">
 					</a>
 				</div>
 				<div class="col-md-8">
-					<h6 class="text-muted">@lokal.OpisSkrocony </h6>
-					<p class=" p-y-1">Godziny otwarcia</p>
+					<h6 class="text-muted">@Model.LokaleList[i].OpisSkrocony </h6>
+					<p>Odległość @Model.LokaleList[i].Dystans km</p>
+					@*<p class=" p-y-1">Godziny otwarcia</p>*@
 				</div>
 			</div>
 		</div>
@@ -27,28 +29,7 @@
 		<div class="row">
 
 			<div id="map"></div>
-			<script>
-				function initMap() {
-					var map = new google.maps.Map(document.getElementById('map'), {
-						center: { lat: 52.157758, lng: 19.1271972 },
-						zoom: 6,
-						gestureHandling: 'greedy'
-					});
-					@foreach (var lokal in Model)
-							{
-							<text>
-								var marker = new google.maps.Marker({
-									position: { lat: @lokal.Lat, lng: @lokal.Long },
-						map: map
-					});
-					</text>
-						}
-
-					}
-			</script>
-
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&callback=initMap"
-					async defer></script>
+			
 
 
 		</div>
@@ -63,3 +44,52 @@
 		width: 700px;
 	}
 </style>
+
+
+
+<script>
+				@*var CLat = "@Model.CenterLat";
+	var CLong = "@Model.CenterLong";
+	CLat.toString()/*.replace(",", ".")*/;
+	CLong.toString()/*.replace(",", ".")*/;
+				CLat = CLat.replace(/,/g, '.');
+				CLong = CLong.replace(/,/g, '.');
+				alert(CLong)*@
+
+							function initMap() {
+								var map = new google.maps.Map(document.getElementById('map'), {
+									center: { lat: @Model.CenterLat, lng: @Model.CenterLong },
+									zoom: @Model.Zoom,
+									gestureHandling: 'greedy'
+								});
+
+								@if (Model.MyLat != null)
+									{<text>
+										var marker = new google.maps.Marker({
+									position: { lat: @Model.MyLat, lng: @Model.MyLong },
+									map: map,
+									icon: '../Content/Images/marker-green.png',
+									title: 'Tu jesteś!'
+										});
+									</text>
+
+								}
+
+							@for (var i = 0; i < Model.LokaleList.Count(); i++)
+							{
+								<text>
+								var marker = new google.maps.Marker({
+									position: { lat: @Model.LokaleList[i].Lat, lng: @Model.LokaleList[i].Long },
+									map: map,
+									title: '@Model.LokaleList[i].NazwaLokalu',
+									snippet: '@Model.LokaleList[i].NazwMiejscowosc'
+								});
+								</text>
+							}
+
+				}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFR77SDuMS5dYX2vJmVVOq4lPAmSDI3t0&callback=initMap"
+		async defer></script>

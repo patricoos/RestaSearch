@@ -1,36 +1,80 @@
-﻿@model IEnumerable<RestaSearch.Models.Kategoria>
+﻿@model RestaSearch.ViewModels.HomeViewModel
 @using RestaSearch.Infrastructure
 
 			
 				<div class="card-header bg-primary text-white text-center">Kategorie</div>
 				<div class=" border ">
-					@foreach (var kategoria in Model)
+					@using (Html.BeginForm("Lista", "Lokale", FormMethod.Get))
 					{
-						<a class="btn btn-outline-primary m-1" href="@Url.Action("Lista", "Lokale", new { nazwaKategorii = kategoria.NazwaKategorii.ToLower()})"><i class="fa fa-fw fa-cutlery"></i>@kategoria.NazwaKategorii</a>
-					}
-					<div class=" m-1">
-						<p>
-							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
-						</p>
-						<div class="collapse" id="collapseExample">
-							<div class="card card-body">
-								<h3>Rodzaj kuchni</h3>
+						<div class=" border ">
+							<div>
+								@for (var i = 0; i < Model.Kategorie1.Count(); i++)
+								{
+									<label class="btn btn-outline-primary m-1">
+										@Html.EditorFor(m => Model.Kategorie1[i].Checked)
+										@Html.DisplayFor(m => Model.Kategorie1[i].Nazwa, new { @class = "form-control" })
+										@Html.HiddenFor(m => Model.Kategorie1[i].Id)
+									</label>
+
+								}
+							</div>
+							<input class="btn btn-secondary" type="submit" value="Szukaj" />
+							@*<p>Twoja lokalizacja</p>
+							<input id="Lat" name="Latitude" type="text" value="" />
+							<input id="Long" name="Longitude" type="text" value="" />*@
+
+
+
+
+							<div class=" m-1">
 								<p>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Włoska</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Ślaska</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Azjatycka</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Polska</button>
+									<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Więcej kategorii</button>
 								</p>
-								<h3>Inne</h3>
-								<p>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Sala Weselna</button>
-									<button class="btn btn-outline-primary m-1" data-toggle="buttons" type="checkbox" autocomplete="off">Imprezy Firmowe</button>
-								</p>
+								<div class="collapse" id="collapseExample">
+									<div class="card card-body">
+										<h3>Rodzaj kuchni</h3>
+										<p>
+											@for (var i = 0; i < Model.Kategorie2.Count(); i++)
+											{
+												<label class="btn btn-outline-primary m-1">
+													@Html.EditorFor(m => Model.Kategorie2[i].Checked)
+													@Html.DisplayFor(m => Model.Kategorie2[i].Nazwa)
+													@Html.HiddenFor(m => Model.Kategorie2[i].Id)
+												</label>
+
+											}
+										</p>
+										<h3>Dania</h3>
+										<p>
+											@for (var i = 0; i < Model.Kategorie3.Count(); i++)
+											{
+												<label class="btn btn-outline-primary m-1">
+													@Html.EditorFor(m => Model.Kategorie3[i].Checked)
+													@Html.DisplayFor(m => Model.Kategorie3[i].Nazwa)
+													@Html.HiddenFor(m => Model.Kategorie3[i].Id)
+												</label>
+
+											}
+										</p>
+										<h3>Inne</h3>
+										<p>
+											@for (var i = 0; i < Model.Kategorie4.Count(); i++)
+											{
+												<label class="btn btn-outline-primary m-1">
+													@Html.EditorFor(m => Model.Kategorie4[i].Checked)
+													@Html.DisplayFor(m => Model.Kategorie4[i].Nazwa)
+													@Html.HiddenFor(m => Model.Kategorie4[i].Id)
+												</label>
+
+											}
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
+					}
 				</div>
-				<div class="card-header bg-primary text-white text-center">Miejscowość</div>
+				@*<div class="card-header bg-primary text-white text-center">Miejscowość</div>
 				<div class=" my-0 border">
 					<div class="col">
 						<form class="form-inline  my-1">
@@ -58,6 +102,6 @@
 						</div>
 					</div>
 				</div>
-				<a href="#" class="btn w-100 btn-secondary" target="">Zmień</a>
+				<a href="#" class="btn w-100 btn-secondary" target="">Zmień</a>*@
 			
 			

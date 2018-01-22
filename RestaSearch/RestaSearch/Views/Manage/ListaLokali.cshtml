@@ -1,144 +1,147 @@
 ﻿@model IEnumerable<RestaSearch.Models.Lokal>
 
 @{
-	ViewBag.Title = "ListaLokali";
+	ViewBag.Title = "Lista Lokali";
 	Layout = "~/Views/Shared/_ManageLayout.cshtml";
 }
-
+<h2 class="manageHeader">Twoje Restauracje</h2>
 <div>
 	<hr />
-	<h2 class="manageHeader">Twoje Restauracje</h2>
+
 
 	<div>
 		@if (Model.Any())
 		{
-			<table id="lokale-table" width="100%">
-				<tr>
-					@if (ViewBag.UserIsAdmin)
-				{
-						<td>
-							<strong>Nr Lokalu: </strong>
-						</td>
-				}
-					<td>
-						<strong>Nazwa Lokalu: </strong>
-
-					</td>
-					<td>
-						<strong>Adres: </strong>
-					</td>
-					<td>
-						<strong>Data Dodania: </strong>
-
-					</td>
-					<td>
-						<strong>Stan: </strong>
-					</td>
-					<td>
-						@if (ViewBag.UserIsAdmin)
-						{
-							<strong>Ukryty: </strong>
-						}
-					</td>
-					<td></td>
-					<td></td>
-				</tr>
-
-
-
-				@foreach (var lokal in Model)
-				{
+			<table id="lokale-table" class="table" width="100%">
+				<thead class="table-primary">
 					<tr>
 						@if (ViewBag.UserIsAdmin)
-						{
+				{
 							<td>
-								@lokal.LokalId
+								<strong>Nr: </strong>
 							</td>
-						}
+				}
 						<td>
-							@lokal.NazwaLokalu<br />
-						</td>
-						<td>
-							@lokal.KodPocztowy  @lokal.NazwMiejscowosc <br />
-							@lokal.Ulica @lokal.NumerBudynku  @lokal.NumerLokalu
-						</td>
-						<td>
-							@lokal.DataDodania.ToString("dd-MM-yyyy")<br />
-							@lokal.DataDodania.ToString("HH:mm")
-						</td>
-						<td>
-							@if (ViewBag.UserIsAdmin)
-							{
-								<div class="btn-group">
-									@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Nowy)
-									{
-										<button type="button" class="btn btn-success">N</button>
-									}
-									else
-									{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status =RestaSearch.Models.StatusLokalu.Nowy })" class="btn btn-outline-primary">N</a>}
-									@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Widoczny)
-									{
-										<button type="button" class="btn btn-primary">W</button>
-									}
-									else
-									{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status = RestaSearch.Models.StatusLokalu.Widoczny })" class="btn btn-outline-primary">W</a>}
-									@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Promowany)
-									{
-										<button type="button" class="btn btn-warning">P</button>
-									}
-									else
-									{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status = RestaSearch.Models.StatusLokalu.Promowany })" class="btn btn-outline-primary">P</a>}
-									@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Zablokowany)
-									{
-										<button type="button" class="btn btn-danger">Z</button>
-									}
-									else
-									{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status = RestaSearch.Models.StatusLokalu.Zablokowany })" class="btn btn-outline-primary">Z</a>}
-								</div>
+							<strong>Nazwa Lokalu: </strong>
 
-							}
-							else
-							{
-								@Html.DisplayFor(o => lokal.StatusLokalu)
-							}
+						</td>
+						<td>
+							<strong>Adres: </strong>
+						</td>
+						<td>
+							<strong>Data Dodania: </strong>
+
+						</td>
+						<td>
+							<strong>Stan: </strong>
 						</td>
 						<td>
 							@if (ViewBag.UserIsAdmin)
 							{
-								if (lokal.Ukryty)
+								<strong>Ukryty: </strong>
+							}
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</thead>
+
+
+				<tbody>
+					@foreach (var lokal in Model)
+				{
+						<tr>
+							@if (ViewBag.UserIsAdmin)
+							{
+								<td>
+									<strong>@lokal.LokalId</strong>
+								</td>
+							}
+							<td>
+								@lokal.NazwaLokalu<br />
+							</td>
+							<td>
+								@lokal.KodPocztowy  @lokal.NazwMiejscowosc <br />
+								@lokal.Ulica @lokal.NumerBudynku  @lokal.NumerLokalu
+							</td>
+							<td>
+								@lokal.DataDodania.ToString("dd-MM-yyyy")<br />
+								@lokal.DataDodania.ToString("HH:mm")
+							</td>
+							<td>
+								@if (ViewBag.UserIsAdmin)
 								{
-									<a href="@Url.Action("PokazLokal", "Manage", new { lokalId = lokal.LokalId })" class="btn btn-primary">
-										Pokaż
-									</a>
+									<div class="btn-group">
+										@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Nowy)
+										{
+											<button type="button" class="btn btn-success">N</button>
+										}
+										else
+										{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status =RestaSearch.Models.StatusLokalu.Nowy })" class="btn btn-outline-primary">N</a>}
+										@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Widoczny)
+										{
+											<button type="button" class="btn btn-primary">W</button>
+										}
+										else
+										{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status = RestaSearch.Models.StatusLokalu.Widoczny })" class="btn btn-outline-primary">W</a>}
+										@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Promowany)
+										{
+											<button type="button" class="btn btn-warning">P</button>
+										}
+										else
+										{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status = RestaSearch.Models.StatusLokalu.Promowany })" class="btn btn-outline-primary">P</a>}
+										@if (lokal.StatusLokalu == RestaSearch.Models.StatusLokalu.Zablokowany)
+										{
+											<button type="button" class="btn btn-danger">Z</button>
+										}
+										else
+										{<a href="@Url.Action("ZmianaStanuLokalu", "Manage", new { lokalId = lokal.LokalId, status = RestaSearch.Models.StatusLokalu.Zablokowany })" class="btn btn-outline-primary">Z</a>}
+									</div>
+
 								}
 								else
 								{
-									<a href="@Url.Action("UkryjLokal", "Manage", new { lokalId = lokal.LokalId })" class="btn btn-outline-primary">
-										Ukryj
-									</a>
+									@Html.DisplayFor(o => lokal.StatusLokalu)
 								}
+							</td>
+							<td>
+								@if (ViewBag.UserIsAdmin)
+								{
+									if (lokal.Ukryty)
+									{
+										<a href="@Url.Action("PokazLokal", "Manage", new { lokalId = lokal.LokalId })" class="btn btn-primary">
+											Pokaż
+										</a>
+									}
+									else
+									{
+										<a href="@Url.Action("UkryjLokal", "Manage", new { lokalId = lokal.LokalId })" class="btn btn-outline-primary">
+											Ukryj
+										</a>
+									}
 
-							}
-						</td>
-						@*<td>
-								<strong>Dane uzytkownika:</strong><br />
-								@lokal. @lokal.Uzytkownik.Nazwisko<br />
-								@lokal.Uzytkownik.Adres<br />
-								@lokal.Uzytkownik.KodPocztowy @lokal.Uzytkownik.Miasto<br />
-							</td>*@
-						<td>
-							<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("Szczegoly", "Lokale", new { id = lokal.LokalId })">
-								Zobacz szczegóły
-							</a>
-						</td>
-						<td>
-							<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage", new { lokalId = lokal.LokalId })">
-								Edytuj
-							</a>
-						</td>
-					</tr>
+								}
+							</td>
+							@*<td>
+						<strong>Dane uzytkownika:</strong><br />
+						@lokal. @lokal.Uzytkownik.Nazwisko<br />
+						@lokal.Uzytkownik.Adres<br />
+						@lokal.Uzytkownik.KodPocztowy @lokal.Uzytkownik.Miasto<br />
+					</td>*@
+							<td>
+								<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("Szczegoly", "Lokale", new { id = lokal.LokalId })">
+									Zobacz szczegóły
+								</a>
+							</td>
+							<td>
+								<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajLokal", "Manage", new { lokalId = lokal.LokalId })">
+									Edytuj
+								</a>
+							</td>
+						</tr>
 				}
-			</table>
+			</tbody>
+</table>
 		}
 		else
 		{

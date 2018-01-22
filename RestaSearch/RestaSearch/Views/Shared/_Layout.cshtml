@@ -35,16 +35,16 @@
 
 	<div class="bg-light p-2">
 		<div class="container">
-			<div class="row m-1 bg-primary">
-				<form action="@Url.Action("LokaleSzukaj", "Lokale")" class="form-inline m-2 col-md-12" id="search-form" method="post" data-ajax="true">
-					<div class="col-12 col-sm-6 col-md-8 px-3">
+			<div class="row m-1">
+				<form action="@Url.Action("LokaleSzukaj", "Lokale")" class="form-inline ui-autocomplete m-2 col-md-12" id="search-form" method="post" data-ajax="true">
+					<div class=" col-sm-6 col-md-8 ">
 
-						<input  name="term" id="search-filter" type="search" class="form-control w-100"
+						<input  name="term" id="search-filter" type="search" class="form-control w-100 m-2"
 							   data-autocomplete-source="@Url.Action("LokalePodpowiedzi", "Lokale")"
 							   placeholder="Nazwa Lokalu" />
 					</div>
-					<div class="col-1 col-md-4 text-right">
-						<input type="submit" class="btn w-25 btn-secondary  m-2 w-75" value="Szukaj" />
+					<div class=" col-md-4 text-right">
+						<input type="submit" class="btn btn-secondary  m-2 btn-block " value="Szukaj" />
 					</div>
 
 				</form>

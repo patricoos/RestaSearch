@@ -36,6 +36,9 @@ namespace RestaSearch.Models
 		public string Lat { get; set; }
 		public string Long { get; set; }
 
+		public string Link { get; set; }
+		public string FbLink { get; set; }
+
 		//public int MiejscowoscId { get; set; }
 		//public virtual Miejscowosc Miejscowosc { get; set; }
 

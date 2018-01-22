@@ -22,16 +22,13 @@
 							{
 								<label class="btn btn-outline-primary m-1">
 									@Html.EditorFor(m => Model.Kategorie1[i].Checked)
-									@Html.DisplayFor(m => Model.Kategorie1[i].Nazwa)
+									@Html.DisplayFor(m => Model.Kategorie1[i].Nazwa, new { @class = "form-control" })
 									@Html.HiddenFor(m => Model.Kategorie1[i].Id)
 								</label>
 
 							}
 						</div>
-						<input class="btn btn-secondary" type="submit" value="Submit" />
-						<p>Twoja lokalizacja</p>
-						<input id="Lat" name="Latitude" type="text" value="" />
-						<input id="Long" name="Longitude" type="text" value="" />
+						
 
 						
 
@@ -82,8 +79,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 text-center">
+						<input class="btn btn-secondary  w-50 " type="submit" value="Szukaj" />
+						<p class="ukryty"> Twoja lokalizacja</p>
+						<input id="Lat" name="Latitude" class="ukryty" type="text" value="" />
+						<input id="Long" name="Longitude" class="ukryty" type="text" value="" />
+					</div>
 }
-				</div>
+					</div>
 				<div class="col-md-6">
 					<div class="card-header bg-primary text-white text-center">Miejscowość</div>
 					<div class=" my-0 border">
@@ -140,7 +143,7 @@
 				<div class="col-md-12 text-center">
 					<div class="row m-2">
 						<div class="col-md-12 text-center">
-							<input type="submit" class="btn w-25 btn-secondary" value="Szukaj">
+							@*<input type="submit" class="btn w-25 btn-secondary" value="Szukaj">*@
 						</div>
 					</div>
 				</div>
@@ -168,7 +171,6 @@
 						<p class="font-weight-light">
 							<b>@promowane.NazwMiejscowosc</b> - @promowane.Ulica @promowane.NumerBudynku
 
-							<br>Dzisiaj otwarte - 11:00–23:00
 						</p>
 
 					</div>
@@ -194,7 +196,6 @@
 						<p class="blockquote">@najwys.NazwaLokalu</p>
 						<p class="font-weight-light">
 							<b>@najwys.NazwMiejscowosc</b> - @najwys.Ulica @najwys.NumerBudynku
-							<br>Dzisiaj otwarte - 11:00–23:00
 						</p>
 					</div>
 				}
@@ -219,7 +220,6 @@
 						<p class="blockquote">@nowosci.NazwaLokalu</p>
 						<p class="font-weight-light">
 							<b>@nowosci.NazwMiejscowosc</b>  - @nowosci.Ulica @nowosci.NumerBudynku
-							<br>Dzisiaj otwarte - 11:00–23:00
 						</p>
 					</div>
 				}
@@ -329,7 +329,9 @@
 			markers = [];
 			punkt = new google.maps.Marker({
 				position: location,
-				map: map
+				map: map,
+				icon: '../Content/Images/marker-green.png',
+				title: 'Tu jesteś!'
 			});
 			markers.push(punkt);
 		}
@@ -356,5 +358,11 @@
 		#map {
 			height: 400px;
 			width: 100%;
+		}
+		/*.check-box {
+			display: none;
+		}*/
+		.ukryty {
+			visibility: hidden;
 		}
 	</style>

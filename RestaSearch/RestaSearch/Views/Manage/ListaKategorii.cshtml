@@ -4,62 +4,66 @@
     ViewBag.Title = "Lista Kategorii";
     Layout = "~/Views/Shared/_ManageLayout.cshtml";
 }
-
+<h2 class="manageHeader">Lista Kategorii</h2>
 <div>
 	<hr />
-	<h2 class="manageHeader">Lista Kategorii</h2>
+
 
 	<div>
 		@if (Model.Any())
 		{
-			<table id="lokale-table" width="100%">
-
-				<tr>
-					<td>
-						<strong>Nr kategorii: </strong>
-					</td>
-					<td>
-						<strong>Typ Kategorii </strong>
-					</td>
-					<td>
-						<strong>Nazwa Kategorii: </strong>
-					</td>
-					<td>
-						<strong>Opis: </strong>
-					</td>
-					<td>
-						<strong>Ukryty: </strong>
-					</td>
-					<td>
-					</td>
-				</tr>
-
-				@foreach (var kategoria in Model)
-				{
+			<table id="lokale-table" class="table"  width="100%">
+				<thead class="table-primary">
 					<tr>
-							<td>
-								@kategoria.KategoriaId
-							</td>
 						<td>
-							@kategoria.Typ
+							<strong>Nr kategorii: </strong>
 						</td>
 						<td>
-							@kategoria.NazwaKategorii<br />
+							<strong>Typ Kategorii </strong>
 						</td>
 						<td>
-							@kategoria.OpisKategorii
+							<strong>Nazwa Kategorii: </strong>
 						</td>
 						<td>
-							@kategoria.Ukryty
+							<strong>Opis: </strong>
 						</td>
 						<td>
-							<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage", new { kategoriaId = kategoria.KategoriaId })">
-								Edytuj
-							</a>
+							<strong>Ukryty: </strong>
 						</td>
+						<td></td>
 					</tr>
+				</thead>
+				<tbody>
+					@foreach (var kategoria in Model)
+				{
+						<tr>
+							<td>
+								<strong>@kategoria.KategoriaId</strong>
+							</td>
+							<td>
+								@kategoria.Typ
+							</td>
+							<td>
+								@kategoria.NazwaKategorii<br />
+							</td>
+							<td>
+								@kategoria.OpisKategorii
+							</td>
+							<td>
+								@if (kategoria.Ukryty)
+								{<text>Tak</text>}
+								else
+								{<text>Nie</text>}
+							</td>
+							<td>
+								<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage", new { kategoriaId = kategoria.KategoriaId })">
+									Edytuj
+								</a>
+							</td>
+						</tr>
 				}
-			</table>
+				</tbody>
+</table>
 		}
 		else
 		{

@@ -52,9 +52,9 @@
 					<td>@Html.ValidationMessageFor(o => o.Lokal.NumerBudynku)</td>
 				</tr>
 				<tr>
-					<td>@Html.LabelFor(o => o.Lokal.NazwaLokalu, "Nazwa Lokalu: (opcjonelne)")</td>
-					<td>@Html.TextBoxFor(o => o.Lokal.NazwaLokalu)</td>
-					<td>@Html.ValidationMessageFor(o => o.Lokal.NazwaLokalu)</td>
+					<td>@Html.LabelFor(o => o.Lokal.NumerLokalu, "Numer Lokalu: (opcjonelne)")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.NumerLokalu)</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.NumerLokalu)</td>
 				</tr>
 				<tr>
 					<td>@Html.LabelFor(o => o.Lokal.OpisSkrocony, "Opis skrócony:")</td>
@@ -66,7 +66,16 @@
 					<td>@Html.TextAreaFor(o => o.Lokal.Opis, new { rows = "5" })</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.Opis)</td>
 				</tr>
-
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.Link, "Strona WWW:")</td>
+					<td>@Html.TextAreaFor(o => o.Lokal.Link, new { rows = "5" })</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.Link)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.FbLink, "Fanpage Facebook:")</td>
+					<td>@Html.TextAreaFor(o => o.Lokal.FbLink, new { rows = "5" })</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.FbLink)</td>
+				</tr>
 				<tr>
 					<td>@Html.LabelFor(model => model.Kategorie1, "Kategoria - Rodzaj Lokalu:")</td>
 				</tr>
@@ -77,6 +86,7 @@
 							@Html.EditorFor(m => Model.Kategorie1[i].Checked)
 							@Html.DisplayFor(m => Model.Kategorie1[i].Nazwa)
 							@Html.HiddenFor(m => Model.Kategorie1[i].Id)
+							<text>&nbsp</text>
 						}
 					</td>
 				</tr>
@@ -90,6 +100,7 @@
 							@Html.EditorFor(m => Model.Kategorie2[i].Checked)
 							@Html.DisplayFor(m => Model.Kategorie2[i].Nazwa)
 							@Html.HiddenFor(m => Model.Kategorie2[i].Id)
+							<text>&nbsp</text>
 						}
 					</td>
 				</tr>
@@ -103,6 +114,7 @@
 							@Html.EditorFor(m => Model.Kategorie3[i].Checked)
 							@Html.DisplayFor(m => Model.Kategorie3[i].Nazwa)
 							@Html.HiddenFor(m => Model.Kategorie3[i].Id)
+							<text>&nbsp</text>
 						}
 					</td>
 				</tr>
@@ -116,6 +128,7 @@
 							@Html.EditorFor(m => Model.Kategorie4[i].Checked)
 							@Html.DisplayFor(m => Model.Kategorie4[i].Nazwa)
 							@Html.HiddenFor(m => Model.Kategorie4[i].Id)
+							<text>&nbsp</text>
 						}
 					</td>
 				</tr>
@@ -145,10 +158,10 @@
 				}
 
 				@*<tr>
-					<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
-					<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
-					<td></td>
-				</tr>*@
+						<td>@Html.LabelFor(o => o.Miejscowosci, "Miejscowosc:")</td>
+						<td>@Html.DropDownListFor(m => m.Lokal.MiejscowoscId, new SelectList(Model.Miejscowosci, "MiejscowoscId", "Nazwa", Model.Miejscowosci.First().MiejscowoscId))</td>
+						<td></td>
+					</tr>*@
 
 			</table>
 			<br />
@@ -163,20 +176,22 @@
 					<td><label for="Lokal_Ulica">Lokalizacja GPS:</label></td>
 				</tr>
 				<tr>
-					<td>@Html.TextBoxFor(o => o.Lokal.Lat)
+					<td>
+						@Html.TextBoxFor(o => o.Lokal.Lat)
 					@Html.ValidationMessageFor(o => o.Lokal.Lat)
 					@Html.TextBoxFor(o => o.Lokal.Long)
-					@Html.ValidationMessageFor(o => o.Lokal.Long)</td>
-				</tr>
+					@Html.ValidationMessageFor(o => o.Lokal.Long)
+				</td>
+			</tr>
 
-				<tr>
-					<td style="text-align: right;">
-						<input type="submit" value="Zapisz" class="submitLink" style="height: 40px; margin-right: 0px; margin-top: 30px; font-weight: bold;" />
-					</td>
-				</tr>
-			</table>
-			<br />
-		</div>
+			<tr>
+				<td style="text-align: right;">
+					<input type="submit" value="Zapisz" class="submitLink" style="height: 40px; margin-right: 0px; margin-top: 30px; font-weight: bold;" />
+				</td>
+			</tr>
+		</table>
+		<br />
+	</div>
 	}
 </div>
 
