@@ -10,7 +10,9 @@
 	@if (Model.Potwierdzenie.HasValue && Model.Potwierdzenie.Value)
 	{
 		<div style="text-align: center; margin: 50px;">
-			Pomyślnie wprowadzono zmiany!
+			<div class="alert alert-success">
+				<strong>Success!</strong> Pomyślnie wprowadzono dane
+			</div>
 		</div>
 	}
 

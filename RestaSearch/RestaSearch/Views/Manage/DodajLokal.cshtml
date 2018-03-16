@@ -9,7 +9,9 @@
 	@if (Model.Potwierdzenie.HasValue && Model.Potwierdzenie.Value)
 	{
 		<div style="text-align: center; margin: 50px;">
-			Pomyślnie wprowadzono zmiany!
+			<div class="alert alert-success">
+				<strong>Success!</strong> Pomyślnie wprowadzono dane
+			</div>
 		</div>
 	}
 
@@ -57,6 +59,16 @@
 					<td>@Html.ValidationMessageFor(o => o.Lokal.NumerLokalu)</td>
 				</tr>
 				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.Link, "Strona WWW:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.Link, new { rows = "5" })</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.Link)</td>
+				</tr>
+				<tr>
+					<td>@Html.LabelFor(o => o.Lokal.FbLink, "Fanpage Facebook:")</td>
+					<td>@Html.TextBoxFor(o => o.Lokal.FbLink, new { rows = "5" })</td>
+					<td>@Html.ValidationMessageFor(o => o.Lokal.FbLink)</td>
+				</tr>
+				<tr>
 					<td>@Html.LabelFor(o => o.Lokal.OpisSkrocony, "Opis skrócony:")</td>
 					<td>@Html.TextAreaFor(o => o.Lokal.OpisSkrocony, new { rows = "3" })</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.OpisSkrocony)</td>
@@ -65,16 +77,6 @@
 					<td>@Html.LabelFor(o => o.Lokal.Opis, "Pełen Opis:")</td>
 					<td>@Html.TextAreaFor(o => o.Lokal.Opis, new { rows = "5" })</td>
 					<td>@Html.ValidationMessageFor(o => o.Lokal.Opis)</td>
-				</tr>
-				<tr>
-					<td>@Html.LabelFor(o => o.Lokal.Link, "Strona WWW:")</td>
-					<td>@Html.TextAreaFor(o => o.Lokal.Link, new { rows = "5" })</td>
-					<td>@Html.ValidationMessageFor(o => o.Lokal.Link)</td>
-				</tr>
-				<tr>
-					<td>@Html.LabelFor(o => o.Lokal.FbLink, "Fanpage Facebook:")</td>
-					<td>@Html.TextAreaFor(o => o.Lokal.FbLink, new { rows = "5" })</td>
-					<td>@Html.ValidationMessageFor(o => o.Lokal.FbLink)</td>
 				</tr>
 				<tr>
 					<td>@Html.LabelFor(model => model.Kategorie1, "Kategoria - Rodzaj Lokalu:")</td>

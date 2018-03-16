@@ -33,10 +33,10 @@ namespace RestaSearch
 			//	url: "wysz-{term}",
 			//	defaults: new { controller = "Lokale", action = "LokaleWyszykiwanie" });
 
-			//routes.MapRoute(
-			//	name: "StronyStatyczne",
-			//	url: "strona/{nazwa}.html",
-			//	defaults: new { controller = "Home", action = "StronyStatyczne" });
+			routes.MapRoute(
+				name: "StronyStatyczne",
+				url: "strona/{nazwa}.html",
+				defaults: new { controller = "Home", action = "StronyStatyczne" });
 
 			routes.MapRoute(
 				name: "Default",

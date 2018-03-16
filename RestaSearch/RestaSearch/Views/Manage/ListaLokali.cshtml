@@ -105,9 +105,7 @@
 								}
 							</td>
 							<td>
-								@if (ViewBag.UserIsAdmin)
-								{
-									if (lokal.Ukryty)
+									@if (lokal.Ukryty)
 									{
 										<a href="@Url.Action("PokazLokal", "Manage", new { lokalId = lokal.LokalId })" class="btn btn-primary">
 											Pokaż
@@ -119,8 +117,6 @@
 											Ukryj
 										</a>
 									}
-
-								}
 							</td>
 							@*<td>
 						<strong>Dane uzytkownika:</strong><br />

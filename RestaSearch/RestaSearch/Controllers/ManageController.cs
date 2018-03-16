@@ -50,23 +50,23 @@ namespace RestaSearch.Controllers
 		[Authorize]
 		public async Task<ActionResult> Index(ManageMessageId? message)
 		{
-			var name = User.Identity.Name;
+			//var name = User.Identity.Name;
 			// logger.Info("Admin główna | " + name);
 
-			if (TempData["ViewData"] != null)
-			{
-				ViewData = (ViewDataDictionary)TempData["ViewData"];
-			}
+			//if (TempData["ViewData"] != null)
+			//{
+			//	ViewData = (ViewDataDictionary)TempData["ViewData"];
+			//}
 
-			if (User.IsInRole("Admin"))
-				ViewBag.UserIsAdmin = true;
-			else
-				ViewBag.UserIsAdmin = false;
+			//if (User.IsInRole("Admin"))
+			//	ViewBag.UserIsAdmin = true;
+			//else
+			//	ViewBag.UserIsAdmin = false;
 
 			var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 			if (user == null)
 			{
-				return View("Error");
+				return View("Login", "Account");
 			}
 
 			var model = new ManageCredentialsViewModel
@@ -150,22 +150,33 @@ namespace RestaSearch.Controllers
 		public ActionResult DodajLokal(int? lokalId, bool? potwierdzenie)
 		{
 			Lokal lokal;
+			var result = new EditLokalViewModel();
 			if (lokalId.HasValue)
 			{
 				ViewBag.EditMode = true;
 				lokal = db.Lokale.Find(lokalId);
+				var kategorie = db.Kategorie.Where(x => x.LokalKategoria.Any(b => (lokalId == b.LokalId))).ToList();
+
+				result.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				foreach (var k1 in result.Kategorie1){ foreach (var k2 in kategorie) { if (k1.Id==k2.KategoriaId) k1.Checked = true; }}
+				result.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				foreach (var k1 in result.Kategorie2) { foreach (var k2 in kategorie) { if (k1.Id == k2.KategoriaId) k1.Checked = true; } }
+				result.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				foreach (var k1 in result.Kategorie3) { foreach (var k2 in kategorie) { if (k1.Id == k2.KategoriaId) k1.Checked = true; } }
+				result.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				foreach (var k1 in result.Kategorie4) { foreach (var k2 in kategorie) { if (k1.Id == k2.KategoriaId) k1.Checked = true; } }
+
 			}
 			else
 			{
 				ViewBag.EditMode = false;
 				lokal = new Lokal();
-			}
 
-			var result = new EditLokalViewModel();
-			result.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
-			result.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
-			result.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
-			result.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				result.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				result.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				result.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+				result.Kategorie4 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Inne).ToList().Select(x => new KategoriaViewModel(x)).ToList();
+			}
 			//result.Miejscowosci = db.Miejscowosci.ToList();
 			result.Lokal = lokal;
 			result.Potwierdzenie = potwierdzenie;
@@ -182,8 +193,45 @@ namespace RestaSearch.Controllers
 			{
 				// modyfikacja produktu
 				db.Entry(model.Lokal).State = EntityState.Modified;
+
+				var CheckedKategorie = model.Kategorie1;
+				CheckedKategorie.AddRange(model.Kategorie2);
+				CheckedKategorie.AddRange(model.Kategorie3);
+				CheckedKategorie.AddRange(model.Kategorie4);
+
+				var lokalekategorie = db.LokaleKategorie.ToList();
+
+				foreach (var lk in lokalekategorie)
+				{
+					foreach (var item in CheckedKategorie.Where(x => (x.Checked == false)))
+					{
+						if (lk.LokalId == model.Lokal.LokalId && item.Id == lk.KategoriaId)
+						{
+							LokalKategoria lokalUsun = db.LokaleKategorie.Find(lk.LokalKategoriaId);
+							db.LokaleKategorie.Remove(lokalUsun);
+							db.SaveChanges();
+						}
+					}
+				}
+
+				foreach (var item in CheckedKategorie.Where(x => x.Checked))
+				{
+					foreach (var lk in lokalekategorie)
+					{
+						if (item.Id == lk.KategoriaId && model.Lokal.LokalId == lk.LokalId)
+							item.Checked = false;
+					}
+				}
+
+				foreach (var item in CheckedKategorie.Where(x => x.Checked))
+				{
+					var lokalKategoria = new LokalKategoria();
+					lokalKategoria.KategoriaId = item.Id;
+					lokalKategoria.LokalId = model.Lokal.LokalId;
+					db.LokaleKategorie.Add(lokalKategoria);
+				}
 				db.SaveChanges();
-				return RedirectToAction("DodajLokal", new { potwierdzenie = true });
+				return RedirectToAction("DodajLokal", new { lokalId = model.Lokal.LokalId, potwierdzenie = true });
 			}
 			else
 			{
@@ -215,7 +263,6 @@ namespace RestaSearch.Controllers
 						CheckedKategorie.AddRange(model.Kategorie3);
 						CheckedKategorie.AddRange(model.Kategorie4);
 
-
 						foreach (var item in CheckedKategorie.Where(x => x.Checked))
 						{
 							var lokalKategoria = new LokalKategoria();
@@ -232,7 +279,7 @@ namespace RestaSearch.Controllers
 					else
 					{
 
-						var kategorie = db.Kategorie.ToList();
+						//var kategorie = db.Kategorie.ToList();
 						model.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 						model.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 						model.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
@@ -247,7 +294,7 @@ namespace RestaSearch.Controllers
 				{
 					ModelState.AddModelError("", "Nie wskazano pliku");
 
-					var kategorie = db.Kategorie.ToList();
+					//var kategorie = db.Kategorie.ToList();
 					model.Kategorie1 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Rodzaj).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 					model.Kategorie2 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Kuchnia).ToList().Select(x => new KategoriaViewModel(x)).ToList();
 					model.Kategorie3 = db.Kategorie.Where(a => !a.Ukryty && a.Typ == Typ.Danie).ToList().Select(x => new KategoriaViewModel(x)).ToList();
@@ -262,23 +309,23 @@ namespace RestaSearch.Controllers
 		[Authorize]
 		public ActionResult ListaLokali()
 		{
-			var name = User.Identity.Name;
+			//var name = User.Identity.Name;
 
 
 			bool isAdmin = User.IsInRole("Admin");
 			ViewBag.UserIsAdmin = isAdmin;
 
-			IEnumerable<Lokal> lokaleUzytkownika;
+			List<Lokal> lokaleUzytkownika;
 
 			// Dla administratora zwracamy wszystkie zamowienia
 			if (isAdmin)
 			{
-				lokaleUzytkownika = db.Lokale.OrderByDescending(o => o.DataDodania).ToArray();
+				lokaleUzytkownika = db.Lokale.OrderByDescending(o => o.DataDodania).ToList();
 			}
 			else
 			{
 				var userId = User.Identity.GetUserId();
-				lokaleUzytkownika = db.Lokale.Where(o => o.UserId == userId).OrderByDescending(o => o.DataDodania).ToArray();
+				lokaleUzytkownika = db.Lokale.Where(o => o.UserId == userId).OrderByDescending(o => o.DataDodania).ToList();
 			}
 
 			return View(lokaleUzytkownika);
@@ -293,7 +340,7 @@ namespace RestaSearch.Controllers
 			return RedirectToAction("ListaLokali");
 		}
 
-		[Authorize(Roles = "Admin")]
+		[Authorize]
 		public ActionResult UkryjLokal(int lokalId)
 		{
 			var lokal = db.Lokale.Find(lokalId);
@@ -303,7 +350,7 @@ namespace RestaSearch.Controllers
 			return RedirectToAction("ListaLokali");
 		}
 
-		[Authorize(Roles = "Admin")]
+		[Authorize]
 		public ActionResult PokazLokal(int lokalId)
 		{
 			var lokal = db.Lokale.Find(lokalId);
@@ -317,16 +364,16 @@ namespace RestaSearch.Controllers
 		public ActionResult ListaKategorii()
 		{
 			IEnumerable<Kategoria> listakategorii = db.Kategorie.ToArray();
-				return View(listakategorii);
+			return View(listakategorii);
 		}
 
-		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		public ActionResult DodajKategorie()
-		{
-			var result = db.Kategorie.ToArray(); ;
-			return View(result);
-		}
+		//[HttpPost]
+		//[Authorize(Roles = "Admin")]
+		//public ActionResult DodajKategorie()
+		//{
+		//	var result = db.Kategorie.ToArray(); ;
+		//	return View(result);
+		//}
 
 		[Authorize(Roles = "Admin")]
 		public ActionResult DodajKategorie(int? kategoriaId, bool? potwierdzenie)
@@ -355,6 +402,9 @@ namespace RestaSearch.Controllers
 		[Authorize(Roles = "Admin")]
 		public ActionResult DodajKategorie(EditKategoriaViewModel model)
 		{
+			bool isAdmin = User.IsInRole("Admin");
+			ViewBag.UserIsAdmin = isAdmin;
+
 			if (model.kategoria.KategoriaId > 0)
 			{
 				// modyfikacja kategori
@@ -364,18 +414,18 @@ namespace RestaSearch.Controllers
 			}
 			else
 			{
-					if (ModelState.IsValid)
-					{
-						model.kategoria.Ukryty = true;
-						db.Kategorie.Add(model.kategoria);
-						db.SaveChanges();
+				if (ModelState.IsValid)
+				{
+					model.kategoria.Ukryty = true;
+					db.Kategorie.Add(model.kategoria);
+					db.SaveChanges();
 
-						return RedirectToAction("DodajKategorie", new { potwierdzenie = true });
-					}
-					else
-					{
-						return View(model);
-					}
+					return RedirectToAction("DodajKategorie", new { kategoriaId = model.kategoria.KategoriaId, potwierdzenie = true });
+				}
+				else
+				{
+					return View(model);
+				}
 			}
 		}
 	}

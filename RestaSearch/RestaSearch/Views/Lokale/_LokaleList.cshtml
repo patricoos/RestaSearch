@@ -17,7 +17,8 @@
 				</div>
 				<div class="col-md-8">
 					<h6 class="text-muted">@Model.LokaleList[i].OpisSkrocony </h6>
-					<p>Odległość @Model.LokaleList[i].Dystans km</p>
+					@if (Model.MyLat != null && Model.MyLong != null) {
+					<p>Odległość @Model.LokaleList[i].Dystans km</p>}
 					@*<p class=" p-y-1">Godziny otwarcia</p>*@
 				</div>
 			</div>

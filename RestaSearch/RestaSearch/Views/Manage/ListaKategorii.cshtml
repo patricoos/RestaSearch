@@ -12,14 +12,12 @@
 	<div>
 		@if (Model.Any())
 		{
+			<h3>Rodzaj lokalu</h3>
 			<table id="lokale-table" class="table"  width="100%">
 				<thead class="table-primary">
 					<tr>
 						<td>
 							<strong>Nr kategorii: </strong>
-						</td>
-						<td>
-							<strong>Typ Kategorii </strong>
 						</td>
 						<td>
 							<strong>Nazwa Kategorii: </strong>
@@ -34,14 +32,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach (var kategoria in Model)
+					@foreach (var kategoria in Model.Where(k => k.Typ == RestaSearch.Models.Typ.Rodzaj))
 				{
 						<tr>
 							<td>
 								<strong>@kategoria.KategoriaId</strong>
-							</td>
-							<td>
-								@kategoria.Typ
 							</td>
 							<td>
 								@kategoria.NazwaKategorii<br />
@@ -64,9 +59,153 @@
 				}
 				</tbody>
 </table>
-		}
-		else
-		{
+
+		<h3>Rodzaj Kuchni</h3>
+					<table id="lokale-table" class="table" width="100%">
+						<thead class="table-primary">
+							<tr>
+								<td>
+									<strong>Nr kategorii: </strong>
+								</td>
+								<td>
+									<strong>Nazwa Kategorii: </strong>
+								</td>
+								<td>
+									<strong>Opis: </strong>
+								</td>
+								<td>
+									<strong>Ukryty: </strong>
+								</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var kategoria in Model.Where(k => k.Typ == RestaSearch.Models.Typ.Kuchnia))
+				{
+								<tr>
+									<td>
+										<strong>@kategoria.KategoriaId</strong>
+									</td>
+									<td>
+										@kategoria.NazwaKategorii<br />
+									</td>
+									<td>
+										@kategoria.OpisKategorii
+									</td>
+									<td>
+										@if (kategoria.Ukryty)
+										{<text>Tak</text>}
+										else
+										{<text>Nie</text>}
+									</td>
+									<td>
+										<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage", new { kategoriaId = kategoria.KategoriaId })">
+											Edytuj
+										</a>
+									</td>
+								</tr>
+				}
+						</tbody>
+					</table>
+
+					<h3>Oferowane dania</h3>
+					<table id="lokale-table" class="table" width="100%">
+						<thead class="table-primary">
+							<tr>
+								<td>
+									<strong>Nr kategorii: </strong>
+								</td>
+								<td>
+									<strong>Nazwa Kategorii: </strong>
+								</td>
+								<td>
+									<strong>Opis: </strong>
+								</td>
+								<td>
+									<strong>Ukryty: </strong>
+								</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var kategoria in Model.Where(k => k.Typ == RestaSearch.Models.Typ.Danie))
+				{
+								<tr>
+									<td>
+										<strong>@kategoria.KategoriaId</strong>
+									</td>
+									<td>
+										@kategoria.NazwaKategorii<br />
+									</td>
+									<td>
+										@kategoria.OpisKategorii
+									</td>
+									<td>
+										@if (kategoria.Ukryty)
+										{<text>Tak</text>}
+										else
+										{<text>Nie</text>}
+									</td>
+									<td>
+										<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage", new { kategoriaId = kategoria.KategoriaId })">
+											Edytuj
+										</a>
+									</td>
+								</tr>
+				}
+						</tbody>
+					</table>
+
+					<h3>Inne</h3>
+					<table id="lokale-table" class="table" width="100%">
+						<thead class="table-primary">
+							<tr>
+								<td>
+									<strong>Nr kategorii: </strong>
+								</td>
+								<td>
+									<strong>Nazwa Kategorii: </strong>
+								</td>
+								<td>
+									<strong>Opis: </strong>
+								</td>
+								<td>
+									<strong>Ukryty: </strong>
+								</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var kategoria in Model.Where(k => k.Typ == RestaSearch.Models.Typ.Inne))
+				{
+								<tr>
+									<td>
+										<strong>@kategoria.KategoriaId</strong>
+									</td>
+									<td>
+										@kategoria.NazwaKategorii<br />
+									</td>
+									<td>
+										@kategoria.OpisKategorii
+									</td>
+									<td>
+										@if (kategoria.Ukryty)
+										{<text>Tak</text>}
+										else
+										{<text>Nie</text>}
+									</td>
+									<td>
+										<a class="btn navbar-btn ml-2 text-white btn-secondary" href="@Url.Action("DodajKategorie", "Manage", new { kategoriaId = kategoria.KategoriaId })">
+											Edytuj
+										</a>
+									</td>
+								</tr>
+				}
+						</tbody>
+					</table>
+}
+else
+{
 			<div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
 				Nie Dodałeś żadnych kategorii .
 			</div>

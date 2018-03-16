@@ -13,6 +13,8 @@ namespace RestaSearch.Models
 
 		public bool Checked { get; set; }
 
+		public Typ Typ { get; set; }
+
 		public KategoriaViewModel()
 		{
 		}
@@ -21,6 +23,7 @@ namespace RestaSearch.Models
 		{
 			Id = kategoria.KategoriaId;
 			Nazwa = kategoria.NazwaKategorii;
+			Typ = kategoria.Typ;
 		}
 
 	}
