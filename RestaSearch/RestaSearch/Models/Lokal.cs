@@ -43,8 +43,6 @@ namespace RestaSearch.Models
 		//public virtual Miejscowosc Miejscowosc { get; set; }
 
 		public StatusLokalu StatusLokalu { get; set; }
-		
-
 
 		public string UserId { get; set; }
 		public virtual ApplicationUser User { get; set; }
